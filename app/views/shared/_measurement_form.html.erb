@@ -1,0 +1,22 @@
+
+<%= form_for @measurement do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <%= f.hidden_field :lat %>
+  <%= f.hidden_field :lon %>
+  <div id="ShowLatLon" class="smallHint" style="display: none;">
+    Lat:
+    <input id="show_lat" class="latlonInput" type="text" style="border: 0; margin: 0" size="30" disabled="disabled">
+    , Lon:
+    <input id="show_lon" class="latlonInput" type="text" style="border: 0; margin: 0" size="30" disabled="disabled">
+  </div>
+  <div id="map_for_measurement" class="mapForPost round" ></div>
+  <div>
+    <%= f.text_field :msph, :class => "round msph" %> <%= f.label :email, "Microsievert per hour" %>
+  </div>
+  <div class="field " >
+    <%= f.text_area :content, :maxlength => 140, :autocomplete => :off, :class => "postField round" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Radiate", :class => "button" %>
+  </div>
+<% end %>

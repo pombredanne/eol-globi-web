@@ -1,0 +1,15 @@
+<tr>
+  <td class="measurement">
+    <span class="content"><%= measurement.content %></span>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(measurement.created_at) %> ago.
+    </span>
+  </td>
+  <% if current_user?(measurements.user) %>
+      <td>
+        <%= link_to "delete", measurement, :method => :delete,
+                                         :confirm => "You sure?",
+                                         :title => measurement.content %>
+      </td>
+  <% end %>
+</tr>

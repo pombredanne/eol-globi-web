@@ -1,0 +1,28 @@
+<div class="posting">
+  <div class="gravatar">
+    <%= link_to gravatar_for(feed_item.user), feed_item.user %>
+  </div>
+  <div class="measurement">
+    <span>
+      <%= link_to feed_item.user.fullname, feed_item.user, :class => "userBold" %>
+    </span><br/>
+    <% unless feed_item.msph.nil? %>
+        <span >
+          <%= link_to feed_item.sievert, feed_item, :class => "msphFeedLink" %>
+        </span>
+    <% end %>
+    <span >
+      <%= feed_item.content %>
+    </span><br/>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(feed_item.created_at) %> ago |
+      <% if current_user?(feed_item.user) %>
+            <%= link_to "delete", feed_item, :method => :delete,
+                                              :confirm => "You sure?",
+                                              :title => feed_item.content %> |
+      <% end %>
+      Share on <a href="#"
+                  onclick="shareOnFacebook('<%= feed_item.spoken_measurement %>', 'http://radioactive-map.com/measurements/<%=feed_item.name%>');">facebook</a>
+    </span>
+  </div>
+</div>

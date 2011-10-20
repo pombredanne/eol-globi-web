@@ -1,0 +1,22 @@
+<% unless @feed_items.empty? %>
+
+    <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+      function shareOnFacebook(message, link){
+        FB.init({
+            appId:'216988828315277', cookie:true,
+            status:true, xfbml:true
+        });
+        FB.ui({ method: 'feed',
+                link: link,
+                description: message});
+      }
+    </script>
+
+    <div style="display: table;" class="measurements">
+        <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
+    </div>
+    <%= will_paginate @feed_items %>
+
+<% end %>

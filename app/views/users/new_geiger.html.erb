@@ -1,0 +1,69 @@
+
+    <%= form_for @geigercounter, :html => {:multipart => true, :accept => "image/gif,image/png,image/jpg"} do |f| %>
+
+        <div class="messages">
+            <%= render 'shared/error_messages', :object => f.object %>
+        </div>
+
+        <p style="text-align:center;">
+          Upload a Image of you Geieger Counter and give him/her a name.
+        </p>
+
+        <div style="display: table;" >
+          <div style="display:table-row;">
+            <div class="labelCel">
+              <label>Image</label>
+            </div>
+            <div class="inputCel" style="width: 400px;" >
+              <%= file_field 'upload', 'datafile'  %>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: table;">
+          <div style="display:table-row;">
+            <div class="labelCel">
+              <%= f.label :name %>
+            </div>
+            <div class="inputCel">
+              <%= f.text_field :name, :class => "round" %>
+            </div>
+            <div class="hintCel smallHint">
+              A unique name for your geiger
+            </div>
+          </div>
+
+          <div style="display:table-row;">
+            <div class="labelCel">
+              <%= f.label :tolerance %>
+            </div>
+            <div class="inputCel">
+              <%= f.text_field :tolerance, :class => "round" %>
+            </div>
+            <div class="hintCel smallHint">
+              How many percent tolerance have your geiger?
+            </div>
+          </div>
+
+          <div style="display:table-row;">
+            <div class="labelCel">
+              <%= f.label :manufacturer %>
+            </div>
+            <div class="inputCel">
+              <%= f.text_field :manufacturer, :class => "round" %>
+            </div>
+            <div class="hintCel smallHint">
+              Do you know the manufacturer?
+            </div>
+          </div>
+
+          <div style="display:table-row;">
+            <div class="labelCel"></div>
+            <div class="inputCel">
+              <%= f.submit "Create Geiger", :class => "button" %>
+            </div>
+            <div class="hintCel smallHint"></div>
+          </div>
+        </div>
+
+    <% end  %>

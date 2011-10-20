@@ -1,0 +1,41 @@
+<h1>Sign in</h1>
+
+<%= form_for(:session, :url => sessions_path) do |f|  %>
+    <div style="display:table-row;">
+      <div class="labelCel">
+        <%= f.label :email %>
+      </div>
+      <div class="inputCel">
+        <%= f.text_field :email, :class => "round" %>
+      </div>
+      <div class="hintCel"></div>
+    </div>
+    <div style="display:table-row;">
+      <div class="labelCel">
+        <%= f.label :password %>
+      </div>
+      <div class="inputCel">
+        <%= f.password_field :password, :class => "round" %>
+      </div>
+      <div class="hintCel smallHint">
+        Your secret.
+      </div>
+    </div>
+    <div style="display:table-row;">
+      <div class="labelCel"></div>
+      <div class="inputCel">
+        <%= f.submit "Sign in", :class => "button  " %>
+      </div>
+      <div class="hintCel">
+
+      </div>
+    </div>
+<% end %>
+
+<div id="register-area" style="display:block; margin-top: 50px; text-align:center;" align="center">
+    <p>
+      You don't have an account yet? <br/>
+      Just sign up for free!
+    </p>
+</div>
+<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>

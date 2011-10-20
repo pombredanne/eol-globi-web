@@ -1,0 +1,36 @@
+<% @user ||= current_user %>
+<div class="stats" style="clear: both;">
+
+  <div>
+    <a href="<%= user_path(@user.username) %>">
+        <span id="measurements" class="stat">
+            <%= pluralize(@user.measurements.count, "measurement") %>
+        </span>
+    </a>
+  </div>
+  <div>
+    <a href="<%= followers_user_path(@user.username) %>">
+        <span id="followers" class="stat">
+            <%= pluralize(@user.followers.count, "follower") %>
+        </span>
+    </a><br/>
+    <% if !@followers.nil? %>
+        <% @followers.each do | follower | %>
+            <%= gravatar_for follower, :size => 20 %>
+        <% end %>
+    <% end %>
+  </div>
+  <div>
+    <a href="<%= following_user_path(@user.username) %>">
+        <span id="following" class="stat">
+            <%= @user.following.count %> following
+        </span>
+    </a><br/>
+    <% if !@following.nil? %>
+        <% @following.each do | following | %>
+            <%= gravatar_for following, :size => 20 %>
+        <% end %>
+    <% end %>
+  </div>
+
+</div>

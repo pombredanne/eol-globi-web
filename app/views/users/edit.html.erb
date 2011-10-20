@@ -1,0 +1,72 @@
+<h1>Edit your Profile</h1>
+
+<%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+
+    <div style="display:table-row;">
+      <div class="labelCel"></div>
+      <div class="inputCel">
+        <%= gravatar_for @user %>
+        <a href="http://gravatar.com/emails">change</a>
+      </div>
+      <div class="hintCel smallHint"></div>
+    </div>
+
+    <div style="display:table-row;">
+      <div class="labelCel">
+        <%= f.label :fullname, "Full Name" %>
+      </div>
+      <div class="inputCel">
+        <%= f.text_field :fullname, :class => "round" %>
+      </div>
+      <div class="hintCel smallHint">
+        This is visible on your posts.
+      </div>
+    </div>
+
+    <div style="display:table-row;">
+      <div class="labelCel">
+        <%= f.label :username %>
+      </div>
+      <div class="inputCel">
+        <%= f.text_field :username, :class => "round" %>
+      </div>
+      <div class="hintCel smallHint">
+        Your public profile:<br/>
+        http://radioactivemap.com/users/ <b>USERNAME</b>
+      </div>
+    </div>
+
+    <div style="display:table-row;">
+      <div class="labelCel">
+        <%= f.label :email %>
+      </div>
+      <div class="inputCel">
+        <%= f.text_field :email, :class => "round" %>
+      </div>
+      <div class="hintCel smallHint">
+        Invisible for other users. We take care of it.
+      </div>
+    </div>
+
+    <div style="display:table-row;">
+      <div class="labelCel">
+        <%= f.label :password %>
+      </div>
+      <div class="inputCel">
+        <%= f.password_field :password, :class => "round" %>
+      </div>
+      <div class="hintCel smallHint">
+        Your secret.
+      </div>
+    </div>
+
+    <div style="display:table-row;">
+      <div class="labelCel"></div>
+      <div class="inputCel">
+        <%= f.submit "Save", :class => "button" %>
+      </div>
+      <div class="hintCel smallHint"></div>
+    </div>
+
+<% end %>

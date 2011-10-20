@@ -1,0 +1,9 @@
+<li>
+  <%= gravatar_for user, :size => 30 %>
+  <%= link_to user.fullname, user %> -
+  <%= pluralize(user.measurements.count, "measurements") %>
+  <% if current_user.admin? %>
+  | <%= link_to "delete", user, :method => :delete, :confirm => "You are sure?",
+                                :title => "Delete #{user.fullname}" %>
+  <% end %>
+</li>
