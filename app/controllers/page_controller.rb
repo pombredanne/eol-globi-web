@@ -1,6 +1,7 @@
 class PageController < ApplicationController
 
-  include_class Java::org.trophic.graph.service.LocationServiceImpl
+  include_class Java::org.trophic.graph.service.SpecimenServiceImpl
+  include_class Java::org.trophic.graph.factory.SpecimenFactory
 
   def contact
   end
@@ -9,8 +10,9 @@ class PageController < ApplicationController
   end
 
   def home
-      locService = LocationServiceImpl.instance
-      @locations = locService.studyLocations
+      specimenService = SpecimenFactory.specimenService
+      @specimens = specimenService.specimens
+      @specimens
   end
 
   def terms

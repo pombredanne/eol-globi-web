@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-require "/Users/reiz/workspace/ruby/trophic-web/lib/trophic-graph-1.0-SNAPSHOT-all.jar"
+require "lib/trophic-graph-1.0-SNAPSHOT-all.jar"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

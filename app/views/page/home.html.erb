@@ -6,11 +6,10 @@
 	<script language="JavaScript">
 		
 		function placeMarks(){
-			<% @locations.each do |location| %>
-		        var contentString = create_study_content(<%= location.name %>, 'Done', 'http://www.trophic-graph.com');
-		        placeMarker(contentString, <%= location.latitude %>, <%= location.longitude %>);
+			<% @specimens.each do |specimen| %>
+		        var contentString = create_study_content("NA", 'Done', 'http://www.trophic-graph.com');
+		        placeMarker(contentString, <%= specimen.latitude %>, <%= specimen.longitude %>);
 			<% end %>
 		}
 			
 	</script>
-

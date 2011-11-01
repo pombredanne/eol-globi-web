@@ -12,8 +12,8 @@ function initialize() {
         initialize_map_for_landing_page(map_for_landing_page);
     }
 	
-	<% @locations.each do |location| %>
-        placeMarker( create_study_content('<%= location.name %>', 'Done', 'http://www.trophic-graph.com') , <%= location.latitude %>, <%= location.longitude %>);
+	<% @specimens.each do |specimen| %>
+        placeMarker( create_study_content('<%= specimen.species %>', '<%= specimen.lengthInMm %>', 'http://www.trophic-graph.com') , <%= specimen.latitude %>, <%= specimen.longitude %>);
 	<% end %>
 	
 }
@@ -33,7 +33,7 @@ function initialize_map_for_landing_page(htmlElement) {
 function create_study_content(name, status, link){
     var contentString = '<div id="content">'+
        '<span>' + name + '</span><br/>' +
-       '<span class="timestamp">Status: '+ status +'</span> | ' +
+       '<span class="timestamp">Length: '+ length +' mm</span> | ' +
        '<span class="timestamp"><a href="'+link+'" target="_NEW">details</a></span><br/>' +
        '<br/><br/></div>';
     return contentString;
