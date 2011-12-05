@@ -12,6 +12,7 @@ gem 'json'
 gem 'activerdf'
 gem 'activerdf_sparql'
 gem 'gem_plugin', '0.2.3'
+gem 'execjs', '1.2.9'
 
 # Gems used only for assets and not required
 # in production environments by default.
