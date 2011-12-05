@@ -2,14 +2,3 @@
 	<div align="center" style="border: 1px">
 		<div id="map_for_landing_page" class="mapOnStartPage round" ></div>
 	</div>
-	
-	<script language="JavaScript">
-		
-		function placeMarks(){
-			<% @specimens.each do |specimen| %>
-		        var contentString = create_study_content("NA", 'Done', 'http://www.trophic-graph.com');
-		        placeMarker(contentString, <%= specimen.latitude %>, <%= specimen.longitude %>);
-			<% end %>
-		}
-			
-	</script>

@@ -1,6 +1,10 @@
 require File.expand_path('../boot', __FILE__)
 
+require 'java'
+include Java
+
 require 'rails/all'
+require 'active_rdf'
 
 require "lib/trophic-graph-1.0-SNAPSHOT-all.jar"
 
@@ -13,6 +17,11 @@ end
 
 module TrophicWeb
   class Application < Rails::Application
+    
+    adapter = ConnectionPool.add_data_source(:type => :sparql, :results => :sparql_xml, :engine => :virtuoso, :url => "http://dbpedia.org/sparql")
+    adapter.enabled = true
+    Namespace.register(:dbpedia, "http://dbpedia.org/ontology/")
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

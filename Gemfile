@@ -9,6 +9,9 @@ gem 'activerecord-jdbcsqlite3-adapter'
 
 gem 'jruby-openssl'
 gem 'json'
+gem 'activerdf'
+gem 'activerdf_sparql'
+gem 'gem_plugin', '0.2.3'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -13,15 +13,17 @@ function initialize() {
     }
 	
 	<% @specimens.each do |specimen| %>
-        placeMarker( create_study_content('<%= specimen.species %>', '<%= specimen.lengthInMm %>', 'http://www.trophic-graph.com') , <%= specimen.latitude %>, <%= specimen.longitude %>);
+        placeMarker( create_study_content('<%= specimen.species %>', '<%= specimen.lengthInMm %>', '/location?lat=<%=specimen.latitude%>&lng=<%=specimen.longitude%>') , <%= specimen.latitude %>, <%= specimen.longitude %>);
 	<% end %>
+	
+	clusterMarker();
 	
 }
 
 function initialize_map_for_landing_page(htmlElement) {
-    var latlng = new google.maps.LatLng(20.0, -15.4666667);
+    var latlng = new google.maps.LatLng(25.0, -90.4666667);
     var myOptions = {
-        zoom: 2,
+        zoom: 5,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -31,11 +33,11 @@ function initialize_map_for_landing_page(htmlElement) {
 // ***** INIT MAP STOP ********************************
 
 function create_study_content(name, status, link){
-    var contentString = '<div id="content">'+
-       '<span>' + name + '</span><br/>' +
-       '<span class="timestamp">Length: '+ length +' mm</span> | ' +
-       '<span class="timestamp"><a href="'+link+'" target="_NEW">details</a></span><br/>' +
-       '<br/><br/></div>';
+    var contentString = '<div id="mapcontent" class="mapcontent">'+
+       '<h4>' + name + '</h4>' +
+       '<label >Length:</label> '+ length +' mm<br/> ' +
+       '<a href="'+link+'" target="_NEW">details</a><br/>' +
+       '</div>';
     return contentString;
 }
 
