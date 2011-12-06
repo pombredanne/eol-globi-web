@@ -18,8 +18,6 @@ class PageController < ApplicationController
   end
   
   def location
-    
-    
     specimenService = SpecimenFactory.specimenService
     @specimens = specimenService.getSpecimensByLocation(params[:lat], params[:lng])
     @specimens.each do |specimen|
