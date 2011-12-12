@@ -1,6 +1,7 @@
 <script type="text/javascript">
 
 var map
+var mapLocation
 var prev_marker
 var markers = new Array();
 
@@ -10,14 +11,19 @@ function initialize() {
     var map_for_landing_page = document.getElementById("map_for_landing_page");
     if (map_for_landing_page != null){
         initialize_map_for_landing_page(map_for_landing_page);
+		<% @specimens.each do |specimen| %>
+	        placeMarker( create_study_content('<%= specimen.count %>', '/location?lat=<%=specimen.latitude%>&lng=<%=specimen.longitude%>') , <%= specimen.latitude %>, <%= specimen.longitude %>);
+		<% end %>
+		clusterMarker();
     }
-	
-	<% @specimens.each do |specimen| %>
-        placeMarker( create_study_content('<%= specimen.species %>', '<%= specimen.lengthInMm %>', '/location?lat=<%=specimen.latitude%>&lng=<%=specimen.longitude%>') , <%= specimen.latitude %>, <%= specimen.longitude %>);
-	<% end %>
-	
-	clusterMarker();
-	
+		
+	var map_for_location_page = document.getElementById("map_for_location_page");
+    if (map_for_location_page != null){
+        initialize_map_for_location_page(map_for_location_page);		
+		<% if !@lat.nil? && !@lng.nil? %>
+		placeLocationMarker( create_location_content(<%= @lat %>, <%= @lng %>) , <%= @lat %>, <%= @lng %>);
+		<% end %>
+    }	
 }
 
 function initialize_map_for_landing_page(htmlElement) {
@@ -30,13 +36,30 @@ function initialize_map_for_landing_page(htmlElement) {
     map = new google.maps.Map(htmlElement, myOptions);
 }
 
+function initialize_map_for_location_page(htmlElement) {
+    var latlng = new google.maps.LatLng(25.0, -90.4666667);
+    var myOptions = {
+        zoom: 5,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    mapLocation = new google.maps.Map(htmlElement, myOptions);
+}
+
 // ***** INIT MAP STOP ********************************
 
-function create_study_content(name, status, link){
+function create_study_content(specimensCount, link){
     var contentString = '<div id="mapcontent" class="mapcontent">'+
-       '<h4>' + name + '</h4>' +
-       '<label >Length:</label> '+ length +' mm<br/> ' +
+       '<h4>' + specimensCount + ' Specimens</h4>' +
        '<a href="'+link+'" target="_NEW">details</a><br/>' +
+       '</div>';
+    return contentString;
+}
+
+function create_location_content(lat, lng){
+    var contentString = '<div id="mapcontent" class="mapcontent">'+
+       '<label >Lat:</label> '+ lat +' <br/> ' +
+       '<label >Lng:</label> '+ lng +' <br/> ' +
        '</div>';
     return contentString;
 }
@@ -50,6 +73,17 @@ function placeMarker(contentString, lat, lng){
     });
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map, marker);
+    });
+}
+
+function placeLocationMarker(contentString, lat, lng){	
+    var latlng = new google.maps.LatLng(lat, lng);	
+    var marker = new google.maps.Marker({position: latlng, map: mapLocation});
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(mapLocation, marker);
     });
 }
 

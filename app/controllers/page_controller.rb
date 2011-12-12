@@ -18,8 +18,10 @@ class PageController < ApplicationController
   end
   
   def location
+    @lat = params[:lat]
+    @lng = params[:lng]
     specimenService = SpecimenFactory.specimenService
-    @specimens = specimenService.getSpecimensByLocation(params[:lat], params[:lng])
+    @specimens = specimenService.getSpecimensByLocation(@lat, @lng)
     @specimens.each do |specimen|
       fetch_thumbnail specimen
     end

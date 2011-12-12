@@ -399,6 +399,14 @@ ul.users {
     margin-right: auto;
 }
 
+.mapOnLocationPage{
+    width: 650px;
+    height: 500px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .mapForPost{
     width: 440px;
     height: 170px;
