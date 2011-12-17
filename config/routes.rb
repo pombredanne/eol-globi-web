@@ -3,6 +3,7 @@ TrophicWeb::Application.routes.draw do
   root :to => "page#home"
   
   match '/location',      :to => 'page#location'
+  match '/thumbnails',    :to => 'page#thumbnails'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
