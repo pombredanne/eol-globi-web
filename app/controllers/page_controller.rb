@@ -12,7 +12,6 @@ class PageController < ApplicationController
   def home
     specimenService = SpecimenFactory.specimenService
     @specimens = specimenService.specimens
-    p @specimens.length
   end
   
   def location
