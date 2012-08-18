@@ -1,8 +1,5 @@
 class PageController < ApplicationController
 
-  java_import 'org.trophic.graph.service.SpecimenServiceImpl'
-  java_import 'org.trophic.graph.factory.SpecimenFactory'
-
   def contact
   end
 
@@ -10,15 +7,25 @@ class PageController < ApplicationController
   end
 
   def home
-    specimenService = SpecimenFactory.specimenService
-    @specimens = specimenService.specimens
+    render :layout => 'application_lp'
+  end
+
+  def locations
+    respond_to do |format|
+      format.json { 
+        locations = Location.fetch_locations
+        render :json => locations.to_json 
+      }
+    end
   end
   
   def location
     @lat = params[:lat]
-    @lng = params[:lng]
-    specimenService = SpecimenFactory.specimenService
-    @specimens = specimenService.getSpecimensByLocation(@lat, @lng)
+    @lon = params[:lon]
+    if @lat && @lon 
+      @specimens = Specimen.fetch_specimens(@lat, @lon) 
+      p "#{@specimens.count}"
+    end
   end
 
   def terms

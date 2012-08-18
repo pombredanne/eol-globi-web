@@ -1,21 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
-gem 'jquery-rails'
-gem 'activerecord-jdbcsqlite3-adapter'
-gem 'jruby-openssl'
-gem 'json'
-gem 'activerdf'
-gem 'activerdf_sparql'
-gem 'gem_plugin', '0.2.3'
-gem 'execjs', '1.2.9'
-gem 'therubyrhino'
+gem 'rails', '3.2.8'
+gem 'jquery-rails', '2.0.2'
+gem 'pg', '0.14.0'
+gem 'activerdf', '1.6.11'
+gem 'activerdf_sparql', '1.3.6'
+gem 'execjs', '1.4.0'
+gem 'therubyrhino', '2.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails',   '3.2.5'
+  gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '>= 1.0.3'
 end
 

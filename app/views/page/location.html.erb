@@ -1,13 +1,18 @@
-  <div align="center" >
-	<div id="map_for_location_page" class="mapOnLocationPage round" ></div>	
-  </div>
-  <div class="container">
-	<% @specimens.each do |specimen| %>
-		<div class="span-8 round" style="padding: 10px; margin-bottom: 10px; border: 1px solid gray;">
-			<a href="http://www.wikipedia.org/wiki/<%=specimen.species.split(" ")[0]%>"><%= specimen.species %></a></br>
-			<img src="<%= specimen.thumbnail %>" ></img><br/>
-			<label>Length:</label> <%= specimen.lengthInMm %> mm
+	<div align="center" >
+		<div id="map_for_location_page" class="mapOnLocationPage" />
+	</div>
+	<div style="margin: 30px;">
+	<% if @specimens && !@specimens.empty? %> 
+		<div style="text-align:left; padding-bottom: 30px; font-weight: bold;">
+			<%= pluralize(@specimens.count, "Specimen") %>
 		</div>
+		<% @specimens.each do |specimen| %>
+			<div class="result_list_item" style="">
+				<a href="http://www.wikipedia.org/wiki/<%=specimen.species.split(" ")[0]%>"><%= specimen.species %></a> / <label>Length:</label> <%= specimen.length_in_mm %> mm <br/>
+				<img src="<%= specimen.thumbnail %>" /><br/>
+			</div>
+		<% end %>
+	<% else %>
+		No Specimens available for the selected location.
 	<% end %>
-  </div>
-  <br/>  
+	</div>

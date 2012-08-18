@@ -1,12 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'java'
-include Java
-
 require 'rails/all'
 require 'active_rdf'
-
-require "lib/trophic-graph-1.0-SNAPSHOT-all.jar"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

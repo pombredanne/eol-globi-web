@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require markerclusterer
+//= require gmap
 //= require_tree .
