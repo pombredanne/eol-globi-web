@@ -6,6 +6,12 @@ TrophicWeb::Application.routes.draw do
   get '/locations',               :to => 'page#locations'
   get '/thumbnails',              :to => 'page#thumbnails'
   
+  get '/about',                   :to => 'page#about'
+  get '/code_of_ethics',          :to => 'page#code_of_ethics'
+  get '/funding_sources',         :to => 'page#funding_sources'
+  get '/partners',                :to => 'page#partners'
+  get '/data_contributors',       :to => 'page#data_contributors'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,6 +1,7 @@
 body{
     padding: 0;
     margin: 0;
+	font-family: helvetica, arial;
 }
 
 .container{
@@ -47,6 +48,10 @@ body{
     text-align: left;
 }
 
+.content_cell{
+	padding: 30px;
+}
+
 .result_list_item{
     border-bottom: 1px dotted #BBBBBB;
     padding-top: 5px;
@@ -56,4 +61,78 @@ body{
     margin-bottom: 5px;
     vertical-align: middle;
     text-align: left;
+}
+
+.main_nav_fix{
+	position: fixed;
+	top: 0px;
+	left: 100px;
+	z-index: 100;
+	background-color: black;
+}
+
+.footer_fix{
+	position: fixed;
+	bottom: 0px;
+	left: 100px;
+	z-index: 100;
+	background-color: black;
+	color: lightgray;
+}
+
+.footer_fix a{
+	color: lightgray;
+}
+
+.footer_fix a:visited;{
+	color: lightgray;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+	display: table-row;
+}
+
+header ul li {
+    list-style-type: none;
+    display: table-cell;
+	background-color: black;
+	color: lightgray;
+    padding: 0;
+	vertical-align: middle;
+	padding: 10px;
+}
+
+header ul li a {
+	color: lightgray;
+}
+
+header ul li a:visited {
+	color: lightgray;
+}
+
+
+footer ul {
+    margin: 0;
+    padding: 0;
+	display: table-row;
+}
+
+footer ul li {
+    list-style-type: none;
+    display: table-cell;
+	background-color: black;
+	color: lightgray;
+    padding: 0;
+	vertical-align: middle;
+	padding: 10px;
+}
+
+footer ul li a {
+	color: lightgray;
+}
+
+footer ul li a:visited {
+	color: lightgray;
 }

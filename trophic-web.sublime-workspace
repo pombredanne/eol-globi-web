@@ -4,20 +4,24 @@
 		"selected_items":
 		[
 			[
+				"create_",
+				"create_study_location_content"
+			],
+			[
+				"loc",
+				"location"
+			],
+			[
+				"loca",
+				"localhost"
+			],
+			[
 				"speci",
 				"specimen"
 			],
 			[
 				"locat",
 				"locations_map"
-			],
-			[
-				"loc",
-				"locations"
-			],
-			[
-				"loca",
-				"location"
 			],
 			[
 				"spe",
@@ -510,15 +514,108 @@
 			[
 				"Version",
 				"VersionEye"
-			],
-			[
-				"like",
-				"like_overall"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "app/assets/javascripts/gmap.js",
+			"settings":
+			{
+				"buffer_size": 5510,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/config.yml",
+			"settings":
+			{
+				"buffer_size": 235,
+				"line_ending": "Unix",
+				"name": "config.yml"
+			}
+		},
+		{
+			"file": "app/assets/stylesheets/custom.css",
+			"settings":
+			{
+				"buffer_size": 894,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/page_controller.rb",
+			"settings":
+			{
+				"buffer_size": 568,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/specimen.rb",
+			"settings":
+			{
+				"buffer_size": 1682,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layouts/application.html.erb",
+			"settings":
+			{
+				"buffer_size": 396,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/page/location.html.erb",
+			"settings":
+			{
+				"buffer_size": 705,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/routes.rb",
+			"settings":
+			{
+				"buffer_size": 2002,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/location.rb",
+			"settings":
+			{
+				"buffer_size": 1619,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/environment.rb",
+			"settings":
+			{
+				"buffer_size": 484,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/application.rb",
+			"settings":
+			{
+				"buffer_size": 2318,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Gemfile",
+			"settings":
+			{
+				"buffer_size": 610,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -731,6 +828,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"parameters",
+			"placeMarker",
+			"create_location_content",
+			"initialize_map_for_location_page",
 			"label",
 			"create_location_content",
 			".container",
@@ -854,11 +955,7 @@
 			".navi",
 			"round",
 			"Settings",
-			"settings",
-			"name",
-			"render",
-			"border-bottom: 1px dotted $border_color; \n	padding-top: 5px;\n	padding-bottom: 5px; \n	padding-left: 5px;\n	margin-top: 5px;\n	margin-bottom: 5px;\n	vertical-align: middle;",
-			"create_project"
+			"settings"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -895,8 +992,339 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/assets/javascripts/gmap.js",
+					"settings":
+					{
+						"buffer_size": 5510,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1939,
+								2202
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 168.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "config/config.yml",
+					"settings":
+					{
+						"buffer_size": 235,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"auto_name": "config.yml",
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/assets/stylesheets/custom.css",
+					"settings":
+					{
+						"buffer_size": 894,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								430,
+								430
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/controllers/page_controller.rb",
+					"settings":
+					{
+						"buffer_size": 568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								443,
+								443
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/models/specimen.rb",
+					"settings":
+					{
+						"buffer_size": 1682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								431,
+								453
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/layouts/application.html.erb",
+					"settings":
+					{
+						"buffer_size": 396,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								329,
+								320
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/views/page/location.html.erb",
+					"settings":
+					{
+						"buffer_size": 705,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								34,
+								55
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "config/routes.rb",
+					"settings":
+					{
+						"buffer_size": 2002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								105
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/models/location.rb",
+					"settings":
+					{
+						"buffer_size": 1619,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								875,
+								875
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "config/environment.rb",
+					"settings":
+					{
+						"buffer_size": 484,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								98,
+								98
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "config/application.rb",
+					"settings":
+					{
+						"buffer_size": 2318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								850,
+								850
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Gemfile",
+					"settings":
+					{
+						"buffer_size": 610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								79,
+								79
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -942,12 +1370,64 @@
 		"selected_items":
 		[
 			[
-				"head",
-				"app/views/layouts/_header.html.erb"
-			],
-			[
 				"",
 				"app/models/specimen.rb"
+			],
+			[
+				"confi",
+				"config/config.yml"
+			],
+			[
+				"spe",
+				"app/models/specimen.rb"
+			],
+			[
+				"gmap",
+				"app/assets/javascripts/gmap.js"
+			],
+			[
+				"gemf",
+				"Gemfile"
+			],
+			[
+				"application.rb",
+				"config/application.rb"
+			],
+			[
+				"speci",
+				"app/models/specimen.rb"
+			],
+			[
+				"custom",
+				"app/assets/stylesheets/custom.css"
+			],
+			[
+				"gma",
+				"app/assets/javascripts/gmap.js"
+			],
+			[
+				"page",
+				"app/controllers/page_controller.rb"
+			],
+			[
+				"custom.c",
+				"app/assets/stylesheets/custom.css"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"pagecon",
+				"app/controllers/page_controller.rb"
+			],
+			[
+				"custom.",
+				"app/assets/stylesheets/custom.css"
+			],
+			[
+				"head",
+				"app/views/layouts/_header.html.erb"
 			],
 			[
 				"pagecont",
@@ -966,40 +1446,12 @@
 				"app/models/specimen.rb"
 			],
 			[
-				"speci",
-				"app/models/specimen.rb"
-			],
-			[
-				"pagecon",
-				"app/controllers/page_controller.rb"
-			],
-			[
 				"loca",
 				"app/models/location.rb"
 			],
 			[
-				"route",
-				"config/routes.rb"
-			],
-			[
-				"gmap",
-				"app/assets/javascripts/gmap.js"
-			],
-			[
-				"page",
-				"app/controllers/page_controller.rb"
-			],
-			[
 				"bootstr",
 				"app/assets/stylesheets/bootstrap.css"
-			],
-			[
-				"custom",
-				"app/assets/stylesheets/custom.css"
-			],
-			[
-				"custom.",
-				"app/assets/stylesheets/custom.css"
 			],
 			[
 				"custom.css",
@@ -1008,10 +1460,6 @@
 			[
 				"location.rb",
 				"app/models/location.rb"
-			],
-			[
-				"gemf",
-				"Gemfile"
 			],
 			[
 				"data",
@@ -1286,10 +1734,6 @@
 				"app/views/services/index.html.erb"
 			],
 			[
-				"confi",
-				"config/config.yml"
-			],
-			[
 				"production.rb",
 				"config/environments/production.rb"
 			],
@@ -1436,22 +1880,6 @@
 			[
 				"signup",
 				"app/views/users/_signup_info.html.erb"
-			],
-			[
-				"service",
-				"app/controllers/services_controller.rb"
-			],
-			[
-				"versioncommen",
-				"app/models/versioncomment.rb"
-			],
-			[
-				"produ",
-				"app/models/product.rb"
-			],
-			[
-				"callba",
-				"app/views/facebook/callback.html.erb"
 			]
 		],
 		"width": 0.0

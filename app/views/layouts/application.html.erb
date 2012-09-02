@@ -9,9 +9,17 @@
 </head>
 
 <body onload="initialize()">
-  <div class="container" style="width: 800px;">
-    <%= yield %>
-  </div>
+		
+	<div class="container" style="width: 800px;">
+		<%= render "layouts/header" %>
+		
+		<div>
+			<%= yield %>
+		</div>
+		
+		<%= render "layouts/footer" %>
+	</div>
+	
 </body>
 
 </html>

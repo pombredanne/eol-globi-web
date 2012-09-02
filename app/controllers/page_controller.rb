@@ -36,5 +36,8 @@ class PageController < ApplicationController
 
   def signup
   end
+  
+  def code_of_ethics
+  end
 
 end

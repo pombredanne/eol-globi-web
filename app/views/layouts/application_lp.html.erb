@@ -9,7 +9,13 @@
 </head>
 
 <body onload="initialize()">
-  <%= yield %>	
+	<div class="main_nav_fix">
+		<%= render "layouts/header" %>
+	</div>
+	<%= yield %>	
+	<div class="footer_fix">
+		<%= render "layouts/footer" %>
+	</div>
 </body>
 
 </html>
