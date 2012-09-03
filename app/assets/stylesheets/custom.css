@@ -136,3 +136,24 @@ footer ul li a {
 footer ul li a:visited {
 	color: lightgray;
 }
+
+.div-row{
+	margin: 0;
+    padding: 0;
+	display: table-row;
+}
+
+.div-cell{
+	margin: 0;
+    padding: 0;
+	display: table-cell;
+}
+
+h1{
+	margin-bottom: 30px;
+}
+
+label{
+	font-weight: bold;
+	padding-right: 5px;
+}

@@ -1,0 +1,40 @@
+<div class="content_cell">
+	<h1>Registration</h1>
+	<%= form_for @registration do |f| %>
+	<div class="messages">
+		<%= render 'shared/error_messages', :object => f.object %>		
+    </div>
+	<div class="div-row">
+		<div class="div-cell">
+			<%= f.label :name %>
+		</div>
+		<div class="div-cell">
+			<%= f.text_field :name %>
+		</div>
+	</div>
+	<div class="div-row">	
+		<div class="div-cell">
+			<%= f.label :institution %> 
+		</div>
+		<div class="div-cell">
+			<%= f.text_field :institution %>
+		</div>
+	</div>	
+	<div class="div-row">
+		<div class="div-cell">
+			<%= f.label :email %> 
+		</div>
+		<div class="div-cell">
+			<%= f.text_field :email %>
+		</div>
+	</div>
+	<div class="div-row">
+		<div class="div-cell">
+		
+		</div>
+		<div class="div-cell">
+			<button type="submit" class="btn btn-primary btn-big">Create Registration</button>
+		</div>
+	</div>
+	<% end %>
+</div>

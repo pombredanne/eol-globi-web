@@ -2,6 +2,9 @@ TrophicWeb::Application.routes.draw do
   
   root :to => "page#home"
   
+  resources :registrations
+  get '/registration',            :to => 'registrations#new'
+  
   get '/location',                :to => 'page#location'
   get '/locations',               :to => 'page#locations'
   get '/thumbnails',              :to => 'page#thumbnails'
