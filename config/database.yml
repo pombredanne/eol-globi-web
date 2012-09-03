@@ -21,7 +21,4 @@ test:
   password: abcdef 
 
 production:
-  adapter: postgresql
-  database: trophical_web_dev
-  username: postgres 
-  password: abcdef 
+  uri: <%= ENV['DATABASE_URL'] %>
