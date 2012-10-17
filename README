@@ -1,3 +1,8 @@
+== Prerequisites
+
+1. Ruby v1.9.3 (not 1.8.7)
+2. for running locally using <tt>rails s</tt> clone and run neo4j instance at http://github.com/jhpoelen/trophic-graph-server
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
