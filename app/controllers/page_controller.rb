@@ -28,6 +28,10 @@ class PageController < ApplicationController
     end
   end
 
+  def data_contributors
+    @contributors = Contributor.fetch_contributors
+  end
+
   def terms
   end
 
