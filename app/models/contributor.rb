@@ -1,7 +1,8 @@
 class Contributor
 	require 'net/http'
 
-	attr_accessor :name,:institution,:studyTitle,:numberOfPredatorSpecies,:timePeriod
+	attr_accessor :name,:institution,:studyTitle,:numberOfPredatorSpecies,
+	:timePeriod,:numberOfInteractions,:numberOfPreyTaxa
 
 	def self.fetch_contributors
 		# note that this data should be moved into the neo4j database at some point
@@ -16,7 +17,7 @@ class Contributor
 		akin = Contributor.new
 		akin.name = "S. Akin"
 		akin.institution = "Section of Ecology, Evolutionary Biology and Systematics, Department of Wildlife and Fisheries Sciences,
-Texas A&M University"
+		Texas A&M University"
 		akin.timePeriod = "Mar 1998- Aug 1999"
 		akin.studyTitle = "Seasonal Variation in Food Web Composition and Structure in a Temperate Tidal Estuary"
 		studies["akinMadIsland"] = akin
@@ -46,18 +47,41 @@ Texas A&M University"
 		MATCH study-[:COLLECTED]->predator-[:CLASSIFIED_AS]->taxon 
 		RETURN distinct(study.title), count(distinct(taxon.name))"
 		
-		uri = URI(Settings.neo4j_service)
-		response = Net::HTTP.post_form(uri, 'query' => query)
-		body = JSON.parse response.body
-		contributors = Array.new
+		body = executeQuery(query)
+		
 		body['data'].each do |dat| 
 			p dat
 			contributor = studies[dat[0]]
 			if contributor 
 				contributor.numberOfPredatorSpecies = dat[1]
+			end
+		end
+
+		query = "START study=node:studies('*:*') 
+		MATCH study-[:COLLECTED]->predator-[ateRel:ATE]->prey-[:CLASSIFIED_AS]->taxon 
+		RETURN distinct(study.title), count(ateRel), count(distinct(taxon))"
+		
+		body = executeQuery(query)
+		
+		contributors = Array.new
+		body['data'].each do |dat| 
+			p dat
+			contributor = studies[dat[0]]
+			if contributor 
+				contributor.numberOfInteractions = dat[1]
+				contributor.numberOfPreyTaxa = dat[2]
 				contributors << contributor
 			end
 		end
+
+
 		contributors
 	end
+
+	def self.executeQuery(query)
+		uri = URI(Settings.neo4j_service)
+		response = Net::HTTP.post_form(uri, 'query' => query)
+		body = JSON.parse response.body
+	end
+
 end

@@ -37,15 +37,19 @@
 			<th>Contributor</th>
 			<th>Institution</th>
 			<th>Study Title</th>
-			<th>Number of Predator Species</th>
-			<th>Collection Time Period</th>
+			<th>Predator Species</th>
+			<th>Prey Taxa</th>	
+			<th>Total Interactions</th>
+			<th>Period</th>
 		</tr>
 		<% for contributor in @contributors  %>
 		<tr>
 			<td><%= contributor.name %></td>
 			<td><%= contributor.institution %></td>
 			<td><%= contributor.studyTitle %></td>
-			<td><%= contributor.numberOfPredatorSpecies %></td>			
+			<td><%= contributor.numberOfPredatorSpecies %></td>		
+			<td><%= contributor.numberOfPreyTaxa %></td>		
+			<td><%= contributor.numberOfInteractions %></td>			
 			<td><%= contributor.timePeriod %></td>
 		</tr>
 		<% end %>
