@@ -1,37 +1,6 @@
 <div class="content_cell">
 	<h1>Data Contributors</h1>	
 	<p>Total studies contributed: <%= @contributors.count %> </p>
-	<style type="text/css">
-	#table-3 {
-		border: 1px solid #DFDFDF;
-		background-color: #F9F9F9;
-		width: 100%;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		border-radius: 3px;
-		font-family: Arial,"Bitstream Vera Sans",Helvetica,Verdana,sans-serif;
-		color: #333;
-	}
-	#table-3 td, #table-3 th {
-		border-top-color: white;
-		border-bottom: 1px solid #DFDFDF;
-		color: #555;
-	}
-	#table-3 th {
-		text-shadow: rgba(255, 255, 255, 0.796875) 0px 1px 0px;
-		font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
-		font-weight: normal;
-		padding: 7px 7px 8px;
-		text-align: left;
-		line-height: 1.3em;
-		font-size: 14px;
-	}
-	#table-3 td {
-		font-size: 12px;
-		padding: 4px 7px 2px;
-		vertical-align: top;
-	}
-	</style>
 	<table id="table-3">
 		<tr>
 			<th>Contributor</th>
@@ -42,16 +11,16 @@
 			<th>Total Interactions</th>
 			<th>Period</th>
 		</tr>
-		<% for contributor in @contributors  %>
-		<tr>
-			<td><%= contributor.name %></td>
-			<td><%= contributor.institution %></td>
-			<td><%= contributor.studyTitle %></td>
-			<td><%= contributor.numberOfPredatorSpecies %></td>		
-			<td><%= contributor.numberOfPreyTaxa %></td>		
-			<td><%= contributor.numberOfInteractions %></td>			
-			<td><%= contributor.timePeriod %></td>
-		</tr>
+		<% @contributors.each do |contributor|  %>
+			<tr>
+				<td><%= contributor.name %></td>
+				<td><%= contributor.institution %></td>
+				<td><%= contributor.studyTitle %></td>
+				<td><%= contributor.numberOfPredatorSpecies %></td>		
+				<td><%= contributor.numberOfPreyTaxa %></td>		
+				<td><%= contributor.numberOfInteractions %></td>			
+				<td><%= contributor.timePeriod %></td>
+			</tr>
 		<% end %>
 	</table>
 </div>
