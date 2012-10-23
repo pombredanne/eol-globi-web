@@ -16,6 +16,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :test do
+  gem 'turn', :require => false
+  gem 'rspec-rails', '2.11.0'
+  gem 'webrat', '0.7.3'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -27,4 +33,3 @@ end
 
 # To use debugger
 # gem 'ruby-debug'
-
