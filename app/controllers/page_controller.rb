@@ -28,6 +28,11 @@ class PageController < ApplicationController
     end
   end
 
+  def search 
+    @species = params[:species]
+    p "#{@species}"
+  end
+
   def data_contributors
     @contributors = Contributor.fetch_contributors
   end

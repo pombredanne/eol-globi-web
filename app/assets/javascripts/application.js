@@ -8,4 +8,5 @@
 //= require jquery_ujs
 //= require markerclusterer
 //= require gmap
+//= require custom
 //= require_tree .
