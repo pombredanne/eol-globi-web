@@ -20,6 +20,7 @@ class Specimen
       specimen.length_in_mm = dat[0]['data']['lengthInMm']
       specimen.species = dat[1]['data']['name']
       specimen.speciesExternalId = dat[1]['data']['externalId']
+      specimen.thumbnail = dat[1]['data']['thumbnailURL']
       fetch_taxonUri(specimen)
       # fetch_thumbnail(specimen)
       specimens << specimen
