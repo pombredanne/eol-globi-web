@@ -49,9 +49,8 @@ class Specimen
   else
       #a wild guess
       specimen.taxonUri = "http://www.wikipedia.org/wiki/"
-      p "species name [" << specimen.species << "]"
       if not specimen.species.empty?  
-        specimen.taxonUri << specimen.species.split(" ")[0]
+        specimen.taxonUri << specimen.species.split[0]
       end
   end 
 end
