@@ -49,7 +49,9 @@ class Specimen
   else
       #a wild guess
       specimen.taxonUri = "http://www.wikipedia.org/wiki/"
-      specimen.taxonUri << specimen.species.split(" ")[0]
+      if specimen.species != nil
+        specimen.taxonUri << specimen.species.split(" ")[0]
+      end
   end 
 end
 
