@@ -37,7 +37,11 @@ class Specimen
         speciesId = speciesExternalId.split(":")[1]
         specimen.taxonUri = "http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id="
         specimen.taxonUri << speciesId
-      elsif speciesExternalId.start_with?("urn:lsid:marinespecies.org:taxname")
+     elsif speciesExternalId.start_with?("EOL")
+	speciesId = speciesExternalId.split(":)[1]
+	specimen.taxonUri = "http://www.eol.org/pages/"
+	specimen.taxonUri << speciesId 
+     elsif speciesExternalId.start_with?("urn:lsid:marinespecies.org:taxname")
        speciesId = speciesExternalId.split(":")[4]
        specimen.taxonUri = "http://www.marinespecies.org/aphia.php?p=taxdetails&id="
        specimen.taxonUri << speciesId
