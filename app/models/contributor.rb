@@ -65,7 +65,7 @@ class Contributor
 		end
 
 		query = "START study=node:studies('*:*') 
-		MATCH study-[:COLLECTED]->predator-[ateRel:ATE]->prey-[:CLASSIFIED_AS]->taxon 
+		MATCH study-[:COLLECTED]->predator-[ateRel:ATE|PREYS_UPON|PARASITE_OF|HAS_HOST|INTERACTS_WITH]->prey-[:CLASSIFIED_AS]->taxon 
 		RETURN distinct(study.title), count(ateRel), count(distinct(taxon))"
 		
 		body = executeQuery(query)
