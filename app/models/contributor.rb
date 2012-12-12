@@ -43,6 +43,13 @@ class Contributor
 		wrast.studyTitle = "Spatiotemporal And Habitat-Mediated Food Web Dynamics in Lavaca Bay, Texas"
 		studies["wrast/lavacaBayTrophicData.csv.gz"] = wrast
 
+		storey = Contributor.new
+		storey.name = "Malcolm Storey"
+		storey.institution = "http://bioinfo.org.uk"
+		storey.timePeriod = ""
+		storey.studyTitle = "Food webs and species interactions in the Biodiversity of UK and Ireland."
+		studies["BIO_INFO"] = storey
+
 		query = "START study=node:studies('*:*') 
 		MATCH study-[:COLLECTED]->predator-[:CLASSIFIED_AS]->taxon 
 		RETURN distinct(study.title), count(distinct(taxon.name))"
