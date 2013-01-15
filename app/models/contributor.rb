@@ -50,6 +50,13 @@ class Contributor
 		storey.studyTitle = "Food webs and species interactions in the Biodiversity of UK and Ireland."
 		studies["BIO_INFO"] = storey
 
+		paris = Contributor.new
+		paris.name = "Jose R Ferrer Paris"
+		paris.institution = "South African National Biodiversity Institute Kirstenbosch Research Centre, South Africa."
+		paris.timePeriod = ""
+		paris.studyTitle = "Compilation of hostplant records for butterflies."
+		studies["JRFerrisParisButterflies"] = paris
+
 		query = "START study=node:studies('*:*') 
 		MATCH study-[:COLLECTED]->predator-[:CLASSIFIED_AS]->taxon 
 		RETURN distinct(study.title), count(distinct(taxon.name))"
