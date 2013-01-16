@@ -52,7 +52,7 @@ class Contributor
 
 		paris = Contributor.new
 		paris.name = "Jose R Ferrer Paris"
-		paris.institution = "South African National Biodiversity Institute Kirstenbosch Research Centre, South Africa."
+		paris.institution = "Centro de Estudios Botánicos y Agroforestales, Instituto Venezolano de Investigaciones Científicas; Kirstenbosch Research Center, South African National Biodiversity Institute"
 		paris.timePeriod = ""
 		paris.studyTitle = "Compilation of hostplant records for butterflies."
 		studies["JRFerrisParisButterflies"] = paris
