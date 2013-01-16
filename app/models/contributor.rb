@@ -57,6 +57,14 @@ class Contributor
 		paris.studyTitle = "Compilation of hostplant records for butterflies."
 		studies["JRFerrisParisButterflies"] = paris
 
+		spire = Contributor.new
+		spire.name = "Joel Sachs"
+		spire.institution = "Dept. of Computer Science and Electrical Engineering, University of Maryland Baltimore County, Baltimore, MD, USA."
+		spire.timePeriod = ""
+		spire.studyTitle = "Semantic Prototypes in Research Ecoinformatics (SPIRE)."
+		studies["SPIRE"] = spire
+
+
 		query = "START study=node:studies('*:*') 
 		MATCH study-[:COLLECTED]->predator-[:CLASSIFIED_AS]->taxon 
 		RETURN distinct(study.title), count(distinct(taxon.name))"
