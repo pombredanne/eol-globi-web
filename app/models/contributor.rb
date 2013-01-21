@@ -66,6 +66,12 @@ class Contributor
 		spire.studyTitle = "Semantic Prototypes in Research Ecoinformatics (SPIRE)."
 		studies["SPIRE"] = spire
 
+		ices = Contributor.new
+		ices.name = "<a href=\"http://www.ices.dk/stomachdata/\">ICES Stomach Dataset, ICES, Copenhagen</a>"
+		ices.institution = "International Council for the Exploration of the Sea (ICES); Institute for Marine Resources & Ecosystem Studies (IMARES)"
+		ices.timePeriod = "1980-1991"
+		ices.studyTitle = "<a href=\"http://www.ices.dk/products/cooperative.asp\">ICES Cooperative Research Report No. 164</a>;<a href=\"http://ices.dk/products/cooperative.asp\">ICES Cooperative Research Report No. 219</a>"
+		studies["ICES"] = ices
 
 		query = "START study=node:studies('*:*') 
 		MATCH study-[:COLLECTED]->predator-[:CLASSIFIED_AS]->taxon 
