@@ -5,4 +5,4 @@ test:
   neo4j_service: http://localhost:7474/db/data/cypher
 
 production:
-  neo4j_service: http://ec2-50-112-48-206.us-west-2.compute.amazonaws.com:7474/db/data/cypher
+  neo4j_service: http://46.4.36.142:7474/db/data/cypher
