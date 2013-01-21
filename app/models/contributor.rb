@@ -13,36 +13,36 @@ class Contributor
 		blewett.name = "David A. Blewett"
 		blewett.institution = "Fish and Wildlife Research Institute, Florida Fish and Wildlife Conservation Commission"
 		blewett.timePeriod = "Mar 2000- Feb 2002"
-		blewett.studyTitle = "Feeding Habits of Common Snook, Centropomus undecimalis, in Charlotte Harbor, Florida"
+		blewett.studyTitle = "Feeding Habits of Common Snook, Centropomus undecimalis, in Charlotte Harbor, Florida."
 		studies["Blewett2000CharlotteHarborFL"] = blewett
 
 		akin = Contributor.new
-		akin.name = "S. Akin"
+		akin.name = "Senol Akin"
 		akin.institution = "Section of Ecology, Evolutionary Biology and Systematics, Department of Wildlife and Fisheries Sciences,
 		Texas A&M University"
 		akin.timePeriod = "Mar 1998- Aug 1999"
-		akin.studyTitle = "Seasonal Variation in Food Web Composition and Structure in a Temperate Tidal Estuary"
+		akin.studyTitle = "Seasonal Variation in Food Web Composition and Structure in a Temperate Tidal Estuary."
 		studies["akinMadIsland"] = akin
 
 		simons = Contributor.new
 		simons.name = "James D. Simons"
 		simons.institution = "Center for Coastal Studies, Texas A&M University - Corpus Christi"
-		simons.timePeriod = "1987-1990"
-		simons.studyTitle = "Food habits and trophic structure of the demersal fish assemblages on the Mississippi-Alabama continental shelf"
+		simons.timePeriod = "1987- 1990"
+		simons.studyTitle = "Food habits and trophic structure of the demersal fish assemblages on the Mississippi-Alabama continental shelf."
 		studies["simons/mississippiAlabamaFishDiet.csv.gz"] = simons
 
 		baremore = Contributor.new
 		baremore.name = "Ivy E. Baremore"
 		baremore.institution = "University of Florida, Department of Fisheries and Aquatic Sciences"
 		baremore.timePeriod = "2005"
-		baremore.studyTitle = "Prey Selection By The Atlantic Angel Shark Squatina Dumeril In The Northeastern Gulf Of Mexico"
+		baremore.studyTitle = "Prey Selection By The Atlantic Angel Shark Squatina Dumeril In The Northeastern Gulf Of Mexico."
 		studies["BAREMORE_ANGEL_SHARK"] = baremore
 
 		wrast = Contributor.new
 		wrast.name ="Jenny L. Wrast"
 		wrast.institution = "Department of Life Sciences Texas A&M University-Corpus Christi"
-		wrast.timePeriod = "July 2006 - April 2007"
-		wrast.studyTitle = "Spatiotemporal And Habitat-Mediated Food Web Dynamics in Lavaca Bay, Texas"
+		wrast.timePeriod = "July 2006- April 2007"
+		wrast.studyTitle = "Spatiotemporal And Habitat-Mediated Food Web Dynamics in Lavaca Bay, Texas."
 		studies["wrast/lavacaBayTrophicData.csv.gz"] = wrast
 
 		storey = Contributor.new
@@ -53,7 +53,7 @@ class Contributor
 		studies["BIO_INFO"] = storey
 
 		paris = Contributor.new
-		paris.name = "Jose R Ferrer Paris"
+		paris.name = "Jose R. Ferrer Paris"
 		paris.institution = "Centro de Estudios Botánicos y Agroforestales, Instituto Venezolano de Investigaciones Científicas; Kirstenbosch Research Center, South African National Biodiversity Institute"
 		paris.timePeriod = ""
 		paris.studyTitle = "Compilation of hostplant records for butterflies."
@@ -67,9 +67,9 @@ class Contributor
 		studies["SPIRE"] = spire
 
 		ices = Contributor.new
-		ices.name = "<a href=\"http://www.ices.dk/stomachdata/\">ICES Stomach Dataset, ICES, Copenhagen</a>"
+		ices.name = "<a href=\"http://ecosystemdata.ices.dk/stomachdata/\">ICES Stomach Dataset, ICES, Copenhagen</a>"
 		ices.institution = "International Council for the Exploration of the Sea (ICES); Institute for Marine Resources & Ecosystem Studies (IMARES)"
-		ices.timePeriod = "1980-1991"
+		ices.timePeriod = "1980- 1991"
 		ices.studyTitle = "<a href=\"http://www.ices.dk/products/cooperative.asp\">ICES Cooperative Research Report No. 164</a>;<a href=\"http://ices.dk/products/cooperative.asp\">ICES Cooperative Research Report No. 219</a>"
 		studies["ICES"] = ices
 
