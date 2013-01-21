@@ -13,9 +13,9 @@
 		</tr>
 		<% @contributors.each do |contributor|  %>
 			<tr>
-				<td><%= contributor.name %></td>
-				<td><%= contributor.institution %></td>
-				<td><%= contributor.studyTitle %></td>
+				<td><%= contributor.name.html_safe %></td>
+				<td><%= contributor.institution.html_safe %></td>
+				<td><%= contributor.studyTitle.html_safe %></td>
 				<td><%= contributor.numberOfPredatorSpecies %></td>		
 				<td><%= contributor.numberOfPreyTaxa %></td>		
 				<td><%= contributor.numberOfInteractions %></td>			
