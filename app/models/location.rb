@@ -11,10 +11,10 @@ class Location
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
     locations_map = Hash.new
-    body['data'].each do |dat| 
+    body['data'].each { |lat, lon| 
       location = Location.new 
-      location.latitude = dat[0]
-      location.longitude = dat[1]
+      location.latitude = lat
+      location.longitude = lon
       location.loc_count = 1
       latlon = "#{location.latitude}-#{location.longitude}"
       if locations_map[latlon]
@@ -23,7 +23,7 @@ class Location
       else 
         locations_map[latlon] = location
       end
-    end
+    }
     locations_map
   end
   
