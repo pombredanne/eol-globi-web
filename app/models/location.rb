@@ -13,8 +13,8 @@ class Location
     locations_map = Hash.new
     body['data'].each do |dat| 
       location = Location.new 
-      location.latitude = dat[0]['data'][0]
-      location.longitude = dat[0]['data'][1]
+      location.latitude = dat[0]
+      location.longitude = dat[1]
       location.loc_count = 1
       latlon = "#{location.latitude}-#{location.longitude}"
       if locations_map[latlon]
