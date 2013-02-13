@@ -5,16 +5,16 @@ class Location
   attr_accessor :latitude, :longitude, :altitude, :loc_count
   
   def self.fetch_locations
-    query = "START locations=node:locations('*:*') RETURN locations"
+    query = "START location=node:locations('*:*') 
+              RETURN location.latitude, location.longitude"
     uri = URI(Settings.neo4j_service)
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
     locations_map = Hash.new
     body['data'].each do |dat| 
       location = Location.new 
-      location.latitude = dat[0]['data']['latitude']
-      location.longitude = dat[0]['data']['longitude']
-      location.altitude = dat[0]['data']['altitude']
+      location.latitude = dat[0]['data'][0]
+      location.longitude = dat[0]['data'][1]
       location.loc_count = 1
       latlon = "#{location.latitude}-#{location.longitude}"
       if locations_map[latlon]
