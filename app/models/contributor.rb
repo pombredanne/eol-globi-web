@@ -7,43 +7,25 @@ class Contributor
 	:timePeriod,:numberOfInteractions,:numberOfPreyTaxa
 
 	def self.fetch_contributors
-		# note that this data should be moved into the neo4j database at some point
-		studies = Hash.new
-
-		query = "START study=node:studies('*:*') 
-		MATCH study-[:COLLECTED]->predator-[:CLASSIFIED_AS]->taxon 
-		RETURN study.title, study.institution, study.period, study.description, study.contributor, count(distinct(taxon.name))"
+		query = "START study=node:studies('*:*')
+		MATCH study-[:COLLECTED]->sourceSpecimen-[interact:ATE|PREYS_UPON|PARASITE_OF|HAS_HOST|INTERACTS_WITH]->prey-[:CLASSIFIED_AS]->targetTaxon, sourceSpecimen-[:CLASSIFIED_AS]->sourceTaxon
+		RETURN study.institution, study.period, study.description, study.contributor, count(interact), count(distinct(sourceTaxon)), count(distinct(targetTaxon))"
 		
 		body = executeQuery(query)
-		
+
+    contributors = Array.new
 		body['data'].each do |dat| 
 			p dat
 			contributor = Contributor.new
-			contributor.institution = dat[1]
-			contributor.timePeriod = dat[2]
-			contributor.studyTitle = dat[3]
-			contributor.name = dat[4]
-			contributor.numberOfPredatorSpecies = dat[5]
-			studies[dat[0]] = contributor
+			contributor.institution = dat[0]
+			contributor.timePeriod = dat[1]
+			contributor.studyTitle = dat[2]
+			contributor.name = dat[3]
+      contributor.numberOfInteractions = dat[4]
+      contributor.numberOfPredatorSpecies = dat[5]
+      contributor.numberOfPreyTaxa = dat[6]
+      contributors << contributor
 		end
-
-		query = "START study=node:studies('*:*') 
-		MATCH study-[:COLLECTED]->predator-[ateRel:ATE|PREYS_UPON|PARASITE_OF|HAS_HOST|INTERACTS_WITH]->prey-[:CLASSIFIED_AS]->taxon 
-		RETURN distinct(study.title), count(ateRel), count(distinct(taxon))"
-		
-		body = executeQuery(query)
-		
-		contributors = Array.new
-		body['data'].each do |dat| 
-			p dat
-			contributor = studies[dat[0]]
-			if contributor 
-				contributor.numberOfInteractions = dat[1]
-				contributor.numberOfPreyTaxa = dat[2]
-				contributors << contributor
-			end
-		end
-
 
 		contributors
 	end
