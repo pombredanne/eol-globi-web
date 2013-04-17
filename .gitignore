@@ -3,6 +3,6 @@ db/*.sqlite3
 log/*.log
 tmp/
 data/
-.idea
+.idea/
 lib/trophic-graph-1.0-SNAPSHOT-all.jar
 .sass-cache/
