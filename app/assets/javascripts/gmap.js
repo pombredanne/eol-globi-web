@@ -37,9 +37,9 @@ function initialize() {
 }
 
 function initialize_map_for_landing_page(htmlElement) {
-    var latlng = new google.maps.LatLng(25.0, -90.4666667);
+    var latlng = new google.maps.LatLng(0, 0);
     var myOptions = {
-        zoom: 0,
+        zoom: 2,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
