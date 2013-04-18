@@ -1,8 +1,11 @@
 development:
   neo4j_service: http://localhost:7474/db/data/cypher
+  globi_rest_service: http://46.4.36.142:8080/
 
 test:
   neo4j_service: http://localhost:7474/db/data/cypher
+  globi_rest_service: http://46.4.36.142:8080/
 
 production:
   neo4j_service: http://46.4.36.142:7474/db/data/cypher
+  globi_rest_service: http://46.4.36.142:8080/
