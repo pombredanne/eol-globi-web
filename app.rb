@@ -1,6 +1,6 @@
 require 'sinatra'
 
-get '/' do
+get '//' do
 	redirect "http://eol-globi-web.herokuapp.com"
 end
 
