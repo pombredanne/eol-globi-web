@@ -1,0 +1,25 @@
+<div class="modal hide" id="dialog_search" tabindex="-1" 
+  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 900000;">
+  
+  <%= form_tag("/search", :method => "GET", :class => "form-horizontal") do  %>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Search</h3>
+    </div>
+    <div class="modal-body">
+      
+      <div class="control-group"> 
+        <%= label_tag(:species, "Species", :class => "control-label") %>
+        <div class="controls">
+          <%= text_field_tag :species, "", :class => "input-xlarge" %>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button type="submit" class="btn btn-large btn-primary" >Send</button>
+    </div>
+  <% end %>
+
+</div>

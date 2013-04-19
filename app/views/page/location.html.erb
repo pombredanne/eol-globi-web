@@ -1,0 +1,18 @@
+	<div align="center" >
+		<div id="map_for_location_page" class="mapOnLocationPage" ></div>
+	</div>
+	<div style="margin: 30px;">
+		<% if @specimens && !@specimens.empty? %> 
+			<div style="text-align:left; padding-bottom: 30px; font-weight: bold;">
+				<%= pluralize(@specimens.count, "Specimen") %>
+			</div>
+			<% @specimens.each do |specimen| %>
+				<div class="result_list_item" style="">
+					<a href="<%=specimen.taxonUri%>"><%= specimen.species %></a> / <label>Length:</label> <%= specimen.length_in_mm %> mm <br/>
+					<img src="<%= specimen.thumbnail %>" /><br/>
+				</div>
+			<% end %>
+		<% else %>
+			No Specimens available for the selected location.
+		<% end %>
+	</div>

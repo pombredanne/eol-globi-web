@@ -1,0 +1,30 @@
+<div class="content_cell">
+	<h1>Data Contributors</h1>	
+	<p>Total studies contributed: <%= @contributors.count %> </p>
+	<table id="table-3">
+		<tr>
+			<th>Contributor</th>
+			<th>Institution</th>
+			<th>Study Title</th>
+			<th>Distinct Source Taxa</th>
+			<th>Distinct Target Taxa</th>	
+			<th>Total Interactions</th>
+			<th>Period</th>
+		</tr>
+		<% @contributors.each do |contributor|  %>
+			<tr>
+				<td><%= contributor.name.html_safe %></td>
+				<td><%= contributor.institution.html_safe %></td>
+				<td><%= contributor.studyTitle.html_safe %></td>
+				<td><%= contributor.numberOfPredatorSpecies %></td>		
+				<td><%= contributor.numberOfPreyTaxa %></td>		
+				<td><%= contributor.numberOfInteractions %></td>			
+				<td><%= contributor.timePeriod %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
+
+
+
+
