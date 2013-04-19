@@ -6,3 +6,4 @@ data/
 .idea/
 lib/trophic-graph-1.0-SNAPSHOT-all.jar
 .sass-cache/
+trophic-web.sublime-*
