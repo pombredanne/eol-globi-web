@@ -37,6 +37,7 @@ set :rvm_ruby_string, '2.0.0'
 
 # System-wide RVM installation
 set :rvm_type, :system
+set :rvm_path, "/usr/local/rvm"
 
 namespace :rvm do
   task :trust_rvmrc do
