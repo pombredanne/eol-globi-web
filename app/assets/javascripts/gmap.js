@@ -71,7 +71,7 @@ function get_url_parameters(){
 
 function create_location_content(lat, lng, count, link){
     var contentString = '<div id="mapcontent" class="mapcontent">'+
-       '<label class="label_lp" >Lat:</label> ' + lat + '<br/> <label class="label_lp" >Lng:</label> '+ lng +' <br/> ' +
+       '<label class="label_lp" >Lat:</label> ' + lat + '<br/> <label class="label_lp" >Lng:</label> '+ lng +' <br/><br/> ' +
        '<a href="location?lat='+lat+'&lon='+lng+'" target="_NEW">details</a><br/>' +
        '</div>';
     return contentString;

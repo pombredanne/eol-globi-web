@@ -53,6 +53,8 @@ body{
 
 .label_lp{
   font-weight: bold;
+  width: 35px;
+  display: inline;
 }
 
 .mapcontent{
