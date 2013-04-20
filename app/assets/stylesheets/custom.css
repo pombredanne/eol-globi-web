@@ -1,3 +1,14 @@
+
+#map_for_landing_page img,
+.google-maps img {
+  max-width: none;
+}
+
+#map_for_location_page img, 
+.google-maps img {
+  max-width: none;
+}
+
 body{
     padding: 0;
     margin: 0;
