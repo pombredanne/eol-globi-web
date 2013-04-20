@@ -38,6 +38,12 @@ set :rvm_ruby_string, '2.0.0'
 # System-wide RVM installation
 set :rvm_type, :system
 
+namespace :rvm do
+  task :trust_rvmrc do
+    run "rvm rvmrc trust #{release_path}"
+  end
+end
+
 # Apply default RVM version for the current account
 after "deploy:setup", "deploy:set_rvm_version"
 
