@@ -44,6 +44,13 @@ namespace :rvm do
   end
 end
 
+set :default_environment, {
+  'RUBY_VERSION' => 'ruby-2.0.0-p0',
+  'GEM_HOME'     => '/usr/local/rvm/gems/ruby-2.0.0-p0@eol-globi-web/',
+  'GEM_PATH'     => '/usr/local/rvm/gems/ruby-2.0.0-p0@eol-globi-web/',
+  'BUNDLE_PATH'  => '/usr/local/rvm/gems/ruby-2.0.0-p0@eol-globi-web/'
+}
+
 # Apply default RVM version for the current account
 after "deploy:setup", "deploy:set_rvm_version"
 
