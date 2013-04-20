@@ -7,6 +7,11 @@ gem 'activerdf', '1.6.11'
 gem 'activerdf_sparql', '1.3.6'
 gem 'execjs', '1.4.0'
 gem 'therubyrhino', '2.0.0'
+gem 'unicorn', '4.6.2'   # For production server
+
+# Deploy with Capistrano
+gem 'capistrano'
+gem 'rvm-capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,12 +29,6 @@ end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug'

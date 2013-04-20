@@ -6,7 +6,7 @@ class Location
   
   def self.fetch_locations
     query = "START location=node:locations('*:*') 
-    RETURN location.latitude, location.longitude"
+             RETURN location.latitude, location.longitude"
     uri = URI(Settings.neo4j_service)
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
