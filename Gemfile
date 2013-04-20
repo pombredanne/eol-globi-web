@@ -6,7 +6,7 @@ gem 'pg', '0.14.0'
 gem 'activerdf', '1.6.11'
 gem 'activerdf_sparql', '1.3.6'
 gem 'execjs', '1.4.0'
-gem 'therubyrhino', '2.0.0'
+gem 'therubyracer', '0.11.4'
 gem 'unicorn', '4.6.2'   # For production server
 
 # Deploy with Capistrano

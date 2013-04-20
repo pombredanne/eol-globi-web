@@ -33,7 +33,7 @@ set :user, "capistrano"
 set :use_sudo, false
 
 # Target ruby version
-set :rvm_ruby_string, '1.9.3'
+set :rvm_ruby_string, '2.0.0'
 
 # System-wide RVM installation
 set :rvm_type, :system
