@@ -24,4 +24,9 @@ test:
   password: postgres 
 
 production:
-  uri: <%= ENV['DATABASE_URL'] %>
+  host: localhost
+  port: 5432
+  adapter: postgresql
+  database: trophical_web_prod
+  username: capistrano
+  password: capisto
