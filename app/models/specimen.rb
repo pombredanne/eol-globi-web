@@ -4,11 +4,11 @@ class Specimen
 
   attr_accessor :latitude, :longitude, :length_in_mm, :species, :speciesExternalId, :thumbnail,:taxonUri
   
-  def self.fetch_specimens(lat, lon)
-    p "lat: #{lat} lon: #{lon}"
+  def self.fetch_specimens(lat, lng)
+    p "lat: #{lat} lng: #{lng}"
     query = "START location=node:locations('*:*') 
     MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species 
-    WHERE location.latitude=#{lat} AND location.longitude=#{lon} RETURN specimen, species"
+    WHERE location.latitude=#{lat} AND location.longitude=#{lng} RETURN specimen, species"
     uri = URI(Settings.neo4j_service)
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
@@ -16,7 +16,7 @@ class Specimen
     body['data'].each do |dat| 
       specimen = Specimen.new 
       specimen.latitude = lat
-      specimen.longitude = lon
+      specimen.longitude = lng
       specimen.length_in_mm = dat[0]['data']['lengthInMm']
       specimen.species = dat[1]['data']['name']
       specimen.speciesExternalId = dat[1]['data']['externalId']
