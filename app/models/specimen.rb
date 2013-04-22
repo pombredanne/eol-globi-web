@@ -4,8 +4,8 @@ class Specimen
 
   attr_accessor :latitude, :longitude, :length_in_mm, :species, :speciesExternalId, :thumbnail,:taxonUri
   
-  def self.fetch_specimens(lat, lon)
-    p "lat: #{lat} lon: #{lon}"
+  def self.fetch_specimens(lat, lng)
+    p "lat: #{lat} lng: #{lng}"
     query = "START location=node:locations('*:*') 
              MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species 
              WHERE location.latitude=#{lat} AND location.longitude=#{lon} RETURN specimen, species"
@@ -16,7 +16,7 @@ class Specimen
     body['data'].each do |dat| 
       specimen = Specimen.new 
       specimen.latitude = lat
-      specimen.longitude = lon
+      specimen.longitude = lng
       specimen.length_in_mm = dat[0]['data']['lengthInMm']
       specimen.species = dat[1]['data']['name']
       specimen.speciesExternalId = dat[1]['data']['externalId']
@@ -64,7 +64,8 @@ class Specimen
       sp = RDFS::Resource.new("http://dbpedia.org/resource/#{species}")
       specimen.thumbnail = sp.dbpedia::thumbnail.uri
       p "#{specimen.thumbnail}"      
-    rescue
+    rescue => e 
+      p e 
       #fetch_thumbnail_second_try(specimen)
     end
       

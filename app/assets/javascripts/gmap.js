@@ -30,9 +30,9 @@ function initialize() {
 	var map_for_location_page = document.getElementById("map_for_location_page");
     if (map_for_location_page != null){
         params = get_url_parameters()
-        initialize_map_for_location_page(map_for_location_page, params['lat'], params['lon']);
-        content = create_study_location_content(params['lat'], params['lon'])
-        placeLocationMarker(content, params['lat'], params['lon']);
+        initialize_map_for_location_page(map_for_location_page, params['lat'], params['lng']);
+        content = create_study_location_content(params['lat'], params['lng'])
+        placeLocationMarker(content, params['lat'], params['lng']);
     }	
 }
 
@@ -46,8 +46,8 @@ function initialize_map_for_landing_page(htmlElement) {
     map = new google.maps.Map(htmlElement, myOptions);
 }
 
-function initialize_map_for_location_page(htmlElement, lat, lon) {
-    var latlng = new google.maps.LatLng(hash['lat'], hash['lon']);
+function initialize_map_for_location_page(htmlElement, lat, lng) {
+    var latlng = new google.maps.LatLng(hash['lat'], hash['lng']);
     var myOptions = {
         zoom: 5,
         center: latlng,
@@ -72,7 +72,7 @@ function get_url_parameters(){
 function create_location_content(lat, lng, count, link){
     var contentString = '<div id="mapcontent" class="mapcontent">'+
        '<label class="label_lp" >Lat:</label> ' + lat + '<br/> <label class="label_lp" >Lng:</label> '+ lng +' <br/><br/> ' +
-       '<a href="location?lat='+lat+'&lon='+lng+'" target="_NEW">details</a><br/>' +
+       '<a href="location?lat='+lat+'&lng='+lng+'" target="_NEW">details</a><br/>' +
        '</div>';
     return contentString;
 }

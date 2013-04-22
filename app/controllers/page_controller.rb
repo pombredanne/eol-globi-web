@@ -21,9 +21,9 @@ class PageController < ApplicationController
   
   def location
     @lat = params[:lat]
-    @lon = params[:lon]
-    if @lat && @lon 
-      @specimens = Specimen.fetch_specimens(@lat, @lon) 
+    @lng = params[:lng]
+    if @lat && @lng
+      @specimens = Specimen.fetch_specimens(@lat, @lng)
       p "#{@specimens.count}"
     end
   end
