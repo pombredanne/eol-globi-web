@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/reiz/eol-globi-web.png)](https://travis-ci.org/reiz/eol-globi-web)
 [![Dependency Status](http://www.versioneye.com/user/projects/5175aa41b0fd03000200010e/badge.png)](http://www.versioneye.com/user/projects/5175aa41b0fd03000200010e)
 
 This is an example of how to use EOL's Global Biotic Interactions (globi) services in a ruby on rails web app.
