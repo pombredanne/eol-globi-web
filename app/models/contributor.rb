@@ -28,7 +28,7 @@ class Contributor
 
 	def self.executeQuery
 		uri = URI(Settings.globi_rest_service + 'contributors')
-		response = Net::HTTP.get_response(uri)
+		response = Net::HTTP.get_response( uri )
 		body = JSON.parse response.body
 	end
 
