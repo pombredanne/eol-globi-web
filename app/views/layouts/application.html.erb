@@ -9,20 +9,20 @@
 </head>
 
 <body onload="initialize()">
-		
-	<div class="container" style="width: 800px;">
-		<%= render "layouts/header" %>
-		
-		<div>
-			<% flash.each do |key, value| %>
-				<div class="flash <%= key %>"><%= value %></div>
-			<% end %>
-			<%= yield %>
-		</div>
-		
-		<%= render "layouts/footer" %>
-	</div>
-	
+    
+  <div class="container" style="width: 800px;">
+    <%= render "layouts/header" %>
+    
+    <div>
+      <% flash.each do |key, value| %>
+        <div class="flash <%= key %>"><%= value %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+    
+    <%= render "layouts/footer" %>
+  </div>
+  
 </body>
 
 </html>

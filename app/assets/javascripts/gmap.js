@@ -72,7 +72,9 @@ function get_url_parameters(){
 function create_location_content(lat, lng, count, link){
     var contentString = '<div id="mapcontent" class="mapcontent">'+
        '<label class="label_lp" >Lat:</label> ' + lat + '<br/> <label class="label_lp" >Lng:</label> '+ lng +' <br/><br/> ' +
-       '<a href="location?lat='+lat+'&lng='+lng+'" target="_NEW">details</a><br/>' +
+       '<a href="location?lat='+lat+'&lng='+lng+'" target="_NEW">' + 
+       '<span >COUNT specimens</span></br>' +
+       '</a><br/>' +
        '</div>';
     return contentString;
 }
@@ -86,20 +88,22 @@ function create_study_location_content(lat, lng){
 }
 
 function placeMarker(contentString, lat, lng){
-    // alert(contentString)
-    // alert(lat)
-    // alert(lng)
     var latlng = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({position: latlng, map: map});
-    // alert(marker)
     markers.push(marker);
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });
     google.maps.event.addListener(marker, 'click', function() {
+      response = jQuery.ajax( { url:     '/location_count.txt?lat='+lat+'&lng='+lng+'',
+                                success: function(result) {
+                                           if(result.isOk == false)
+                                              alert(result.message);
+                                         },
+                                async:   false } ); 
+      infowindow.content = infowindow.content.replace("COUNT", response.responseText);
       infowindow.open(map, marker);
     });
-    // alert("end")
 }
 
 function placeLocationMarker(contentString, lat, lng){	

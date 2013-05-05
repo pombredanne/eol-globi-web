@@ -28,6 +28,22 @@ class PageController < ApplicationController
     end
   end
 
+  def location_count 
+    lat = params[:lat]
+    lng = params[:lng]
+    specimens_count = 0
+    if lat && lng
+      specimens_count = Specimen.fetch_specimens_count(lat, lng)
+    end
+    respond_to do |format|
+      format.text { 
+        render :text => specimens_count
+      }
+    end
+  end
+
+
+
   def search 
     @species = params[:species]
     p "#{@species}"

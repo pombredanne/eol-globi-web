@@ -6,6 +6,7 @@ TrophicWeb::Application.routes.draw do
   get '/registration',            :to => 'registrations#new'
   
   get '/location',                :to => 'page#location'
+  get '/location_count',          :to => 'page#location_count'
   get '/locations',               :to => 'page#locations'
   get '/thumbnails',              :to => 'page#thumbnails'
   

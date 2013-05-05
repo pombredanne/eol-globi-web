@@ -5,11 +5,10 @@ class Specimen
   attr_accessor :latitude, :longitude, :length_in_mm, :species, :speciesExternalId, :thumbnail,:taxonUri
   
   def self.fetch_specimens(lat, lng)
-    p "lat: #{lat} lng: #{lng}"
+    uri = URI(Settings.neo4j_service)
     query = "START location=node:locations('*:*') 
              MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species 
-             WHERE location.latitude=#{lat} AND location.longitude=#{lon} RETURN specimen, species"
-    uri = URI(Settings.neo4j_service)
+             WHERE location.latitude=#{lat} AND location.longitude=#{lng} RETURN specimen, species"
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
     specimens = Array.new
@@ -26,6 +25,16 @@ class Specimen
       specimens << specimen
     end
     specimens
+  end
+
+  def self.fetch_specimens_count(lat, lng)
+    query = "START location=node:locations('*:*') 
+             MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species 
+             WHERE location.latitude=#{lat} AND location.longitude=#{lng} RETURN specimen, species"
+    uri = URI(Settings.neo4j_service)
+    response = Net::HTTP.post_form(uri, 'query' => query)
+    body = JSON.parse response.body
+    body['data'].count 
   end
   
   private 

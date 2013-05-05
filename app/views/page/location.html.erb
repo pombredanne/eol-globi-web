@@ -1,18 +1,41 @@
-	<div align="center" >
-		<div id="map_for_location_page" class="mapOnLocationPage" ></div>
-	</div>
-	<div style="margin: 30px;">
-		<% if @specimens && !@specimens.empty? %> 
-			<div style="text-align:left; padding-bottom: 30px; font-weight: bold;">
-				<%= pluralize(@specimens.count, "Specimen") %>
-			</div>
-			<% @specimens.each do |specimen| %>
-				<div class="result_list_item" style="">
-					<a href="<%=specimen.taxonUri%>"><%= specimen.species %></a> / <label>Length:</label> <%= specimen.length_in_mm %> mm <br/>
-					<img src="<%= specimen.thumbnail %>" /><br/>
-				</div>
-			<% end %>
-		<% else %>
-			No Specimens available for the selected location.
-		<% end %>
-	</div>
+<div align="center" >
+  <div id="map_for_location_page" class="mapOnLocationPage" ></div>
+</div>
+<div style="margin: 30px;">
+  <% if @specimens && !@specimens.empty? %> 
+    <div style="text-align:left; padding-bottom: 30px; font-weight: bold;">
+      <%= pluralize(@specimens.count, "Specimen") %>
+    </div>
+    <% external_ids = Array.new %>
+    <% @specimens.each do |specimen| %>
+      <div class="result_list_item" style="">
+        <a href="<%=specimen.taxonUri%>"><%= specimen.species %></a> 
+        <% if specimen.length_in_mm %>
+          / <span>Length:</span> <%= specimen.length_in_mm %> mm <br/>
+        <% end %> 
+        <% if specimen.thumbnail %>
+          <img src="<%= specimen.thumbnail %>" /><br/>
+        <% else %>
+          <div id="<%= specimen.speciesExternalId %>"></div>
+          <% external_ids << specimen.speciesExternalId %>
+        <% end %> 
+      </div>
+    <% end %>
+    <script type="text/javascript">
+      <% external_id = external_ids.first %>
+      <% # external_ids.each do |external_id| %>
+        ext_id = '<%= external_id %>'
+        div = document.getElementById(ext_id)
+        url = "http://46.4.36.142:8080/images/" + ext_id
+        $.get(
+            url,
+            function(data) {
+               
+            }
+        );
+      <% # end %>
+    </script>
+  <% else %>
+    No Specimens available for the selected location.
+  <% end %>
+</div>
