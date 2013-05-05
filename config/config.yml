@@ -1,11 +1,11 @@
 development:
-  neo4j_service: trophicgraph.com:7474/db/data/cypher
-  globi_rest_service: trophicgraph.com:8080/
+  neo4j_service: http://trophicgraph.com:7474/db/data/cypher
+  globi_rest_service: http://trophicgraph.com:8080/
 
 test:
-  neo4j_service: trophicgraph.com:7474/db/data/cypher
-  globi_rest_service: trophicgraph.com:8080/
+  neo4j_service: http://trophicgraph.com:7474/db/data/cypher
+  globi_rest_service: http://trophicgraph.com:8080/
 
 production:
-  neo4j_service: trophicgraph.com:7474/db/data/cypher
-  globi_rest_service: trophicgraph.com:8080/
+  neo4j_service: http://trophicgraph.com:7474/db/data/cypher
+  globi_rest_service: http://trophicgraph.com:8080/
