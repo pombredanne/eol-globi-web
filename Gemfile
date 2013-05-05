@@ -10,7 +10,7 @@ gem 'therubyracer',     '0.11.4'
 gem 'unicorn',          '4.6.2'   # For production server
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano',       '2.15.4'
 gem 'rvm-capistrano'
 
 # Gems used only for assets and not required
@@ -22,7 +22,7 @@ end
 
 group :test do
   gem 'turn', :require => false
-  gem 'rspec-rails',   '2.13.0'
+  gem 'rspec-rails',   '2.13.1'
   gem 'webrat',        '0.7.3'
 end
 
