@@ -5,7 +5,7 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 user 'capistrano', 'capistrano'
 
 # We will spawn off two worker processes and one master process
-worker_processes 2
+worker_processes 20
 
 # set the default working directory
 working_directory "/var/www/eol-globi-web/current"
@@ -24,6 +24,6 @@ timeout 30
 
 pid "/var/www/eol-globi-web/shared/pids/unicorn.pid"
 
-# Set the path of the log files 
+# Set the path of the log files
 stderr_path "/var/www/eol-globi-web/current/log/unicorn.stderr.log"
 stdout_path "/var/www/eol-globi-web/current/log/unicorn.stdout.log"
