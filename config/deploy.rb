@@ -62,15 +62,15 @@ namespace :deploy do
   end
 
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "/etc/init.d/unicorn start"
+    run "/etc/init.d/puma start"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do
-    run "/etc/init.d/unicorn stop"
+    run "/etc/init.d/puma stop"
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "/etc/init.d/unicorn restart"
+    run "/etc/init.d/puma restart"
   end
 
   # Precompile assets
