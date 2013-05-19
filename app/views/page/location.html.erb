@@ -32,19 +32,27 @@
       for (i = 0 ; i < image_divs.size(); i++ ){
         image_div = image_divs[i]
         url = "/thumbnails.json?image_id=" + image_div.id
+        setTimeout(fetch_thumbnail( url ), 1000)
+      }
+
+      function fetch_thumbnail(url){
         $.get(
             url,
             function(data) {
               if (data['error']){
                 // alert( data['error'] )
               } else {
-                div = document.getElementById("EOL:" + data['eolpageId'] + ":" + data['index'])
-                img = document.createElement("img")
-                img.src = data['thumbnailURL']
-                div.appendChild( img )
+                append_image(data)
               }
             }
         );
+      }
+
+      function append_image(data){
+        div = document.getElementById("EOL:" + data['eolpageId'] + ":" + data['index'])
+        img = document.createElement("img")
+        img.src = data['thumbnailURL']
+        div.appendChild( img )
       }
     </script>
   <% else %>

@@ -22,6 +22,7 @@ class ImagesController < ApplicationController
     e.backtrace.each do |message|
       Rails.logger.error message
     end
+    nil
   end
 
 end
