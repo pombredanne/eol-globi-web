@@ -19,7 +19,9 @@ class ImagesController < ApplicationController
     end
   rescue => e
     Rails.logger.error e.message
-    Rails.logger.error e.backtrace.first
+    e.backtrace.each do |message|
+      Rails.logger.error message
+    end
   end
 
 end
