@@ -3,7 +3,7 @@ load "deploy/assets"
 
 # Execute "bundle install" after deploy, but only when really needed
 require "bundler/capistrano"
- 
+
 # RVM integration
 require "rvm/capistrano"
 
@@ -12,19 +12,19 @@ set :application, "eol-globi-web"
 set :repository,  "git@github.com:reiz/eol-globi-web.git"
 
 # Source Control Management
-set :scm, :git 
+set :scm, :git
 
 set :deploy_to, "/var/www/#{application}"
 
 # server there the web server is running (nginx)
 role :web, "46.4.36.142"
 
-# server there the app server is running (unicorn) 
+# server there the app server is running (unicorn)
 role :app, "46.4.36.142"
 
 # server there the db is running
 # This is where Rails migrations will run
-role :db,  "46.4.36.142", :primary => true 
+role :db,  "46.4.36.142", :primary => true
 
 set :rails_env, :production
 
