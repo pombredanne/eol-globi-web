@@ -5,7 +5,7 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 user 'capistrano', 'capistrano'
 
 # We will spawn off two worker processes and one master process
-worker_processes 20
+worker_processes 2
 
 # set the default working directory
 working_directory "/var/www/eol-globi-web/current"

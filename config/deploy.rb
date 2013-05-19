@@ -19,7 +19,7 @@ set :deploy_to, "/var/www/#{application}"
 # server there the web server is running (nginx)
 role :web, "46.4.36.142"
 
-# server there the app server is running (unicorn)
+# server there the app server is running
 role :app, "46.4.36.142"
 
 # server there the db is running
