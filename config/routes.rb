@@ -1,15 +1,15 @@
 TrophicWeb::Application.routes.draw do
-  
+
   root :to => "page#home"
-  
+
   resources :registrations
   get '/registration',            :to => 'registrations#new'
-  
+
   get '/location',                :to => 'page#location'
   get '/location_count',          :to => 'page#location_count'
   get '/locations',               :to => 'page#locations'
-  get '/thumbnails',              :to => 'page#thumbnails'
-  
+  get '/thumbnails',              :to => 'images#thumbnails'
+
   get '/about',                   :to => 'page#about'
   get '/code_of_ethics',          :to => 'page#code_of_ethics'
   get '/funding_sources',         :to => 'page#funding_sources'

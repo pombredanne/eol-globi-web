@@ -2,38 +2,50 @@
   <div id="map_for_location_page" class="mapOnLocationPage" ></div>
 </div>
 <div style="margin: 30px;">
-  <% if @specimens && !@specimens.empty? %> 
+  <% if @specimens && !@specimens.empty? %>
     <div style="text-align:left; padding-bottom: 30px; font-weight: bold;">
       <%= pluralize(@specimens.count, "Specimen") %>
     </div>
     <% external_ids = Array.new %>
-    <% @specimens.each do |specimen| %>
-      <div class="result_list_item" style="">
-        <a href="<%=specimen.taxonUri%>"><%= specimen.species %></a> 
-        <% if specimen.length_in_mm %>
-          / <span>Length:</span> <%= specimen.length_in_mm %> mm <br/>
-        <% end %> 
+    <% @specimens.each_with_index do |specimen, index| %>
+      <div class="result_list_item row" >
+
         <% if specimen.thumbnail %>
-          <img src="<%= specimen.thumbnail %>" /><br/>
+          <div id="<%= specimen.speciesExternalId %>" class="span1">
+            <img src="<%= specimen.thumbnail %>" /><br/>
+          </div>
         <% else %>
-          <div id="<%= specimen.speciesExternalId %>"></div>
-          <% external_ids << specimen.speciesExternalId %>
-        <% end %> 
+          <div id="<%= specimen.speciesExternalId %>:<%= index %>" class="span1"></div>
+        <% end %>
+
+        <div class="span5">
+          <a href="<%=specimen.taxonUri%>" target="_NEW_EOL"><%= specimen.species %></a>
+          <% if specimen.length_in_mm %>
+            / <span>Length:</span> <%= specimen.length_in_mm %> mm <br/>
+          <% end %>
+        </div>
+
       </div>
     <% end %>
     <script type="text/javascript">
-      <% external_id = external_ids.first %>
-      <% # external_ids.each do |external_id| %>
-        ext_id = '<%= external_id %>'
-        div = document.getElementById(ext_id)
-        url = "http://46.4.36.142:8080/images/" + ext_id
+      image_divs = $("div[id^='EOL:']")
+      for (i = 0 ; i < image_divs.size(); i++ ){
+        image_div = image_divs[i]
+        url = "/thumbnails.json?image_id=" + image_div.id
         $.get(
             url,
             function(data) {
-               
+              if (data['error']){
+                // alert( data['error'] )
+              } else {
+                div = document.getElementById("EOL:" + data['eolpageId'] + ":" + data['index'])
+                img = document.createElement("img")
+                img.src = data['thumbnailURL']
+                div.appendChild( img )
+              }
             }
         );
-      <% # end %>
+      }
     </script>
   <% else %>
     No Specimens available for the selected location.

@@ -4,7 +4,7 @@
   max-width: none;
 }
 
-#map_for_location_page img, 
+#map_for_location_page img,
 .google-maps img {
   max-width: none;
 }
@@ -68,7 +68,7 @@ body{
 .result_list_item{
     border-bottom: 1px dotted #BBBBBB;
     padding-top: 5px;
-    padding-bottom: 5px; 
+    padding-bottom: 5px;
     padding-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;

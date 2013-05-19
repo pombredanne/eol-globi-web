@@ -8,6 +8,7 @@ gem 'activerdf_sparql', '1.3.6'
 gem 'execjs',           '1.4.0'
 gem 'therubyracer',     '0.11.4'
 gem 'unicorn',          '4.6.2'   # For production server
+gem 'rest-client',      '1.6.7'
 
 # Deploy with Capistrano
 gem 'capistrano',       '2.15.4'

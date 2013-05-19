@@ -12,23 +12,22 @@ class PageController < ApplicationController
 
   def locations
     respond_to do |format|
-      format.json { 
+      format.json {
         locations = Location.fetch_locations
-        render :json => locations.to_json 
+        render :json => locations.to_json
       }
     end
   end
-  
+
   def location
     @lat = params[:lat]
     @lng = params[:lng]
     if @lat && @lng
       @specimens = Specimen.fetch_specimens(@lat, @lng)
-      p "#{@specimens.count}"
     end
   end
 
-  def location_count 
+  def location_count
     lat = params[:lat]
     lng = params[:lng]
     specimens_count = 0
@@ -36,7 +35,7 @@ class PageController < ApplicationController
       specimens_count = Specimen.fetch_specimens_count(lat, lng)
     end
     respond_to do |format|
-      format.text { 
+      format.text {
         render :text => specimens_count
       }
     end
@@ -44,7 +43,7 @@ class PageController < ApplicationController
 
 
 
-  def search 
+  def search
     @species = params[:species]
     p "#{@species}"
   end
@@ -61,7 +60,7 @@ class PageController < ApplicationController
 
   def signup
   end
-  
+
   def code_of_ethics
   end
 
