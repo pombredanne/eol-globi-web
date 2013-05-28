@@ -17,12 +17,12 @@ gem 'rvm-capistrano'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',     '3.2.6'
-  gem 'uglifier'  ,     '>= 1.0.3'
+  gem 'uglifier'  ,     '2.1.1'
 end
 
 group :test do
   gem 'turn', :require => false
-  gem 'rspec-rails',    '2.13.1'
+  gem 'rspec-rails',    '2.13.2'
   gem 'webrat',         '0.7.3'
 end
 
