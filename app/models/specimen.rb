@@ -1,19 +1,20 @@
 class Specimen
 
   require 'net/http'
+  include HTTParty
 
   attr_accessor :latitude, :longitude, :length_in_mm, :species, :speciesExternalId, :thumbnail,:taxonUri
-  
+
   def self.fetch_specimens(lat, lng)
     uri = URI(Settings.neo4j_service)
-    query = "START location=node:locations('*:*') 
-             MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species 
+    query = "START location=node:locations('*:*')
+             MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species
              WHERE location.latitude=#{lat} AND location.longitude=#{lng} RETURN specimen, species"
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
     specimens = Array.new
-    body['data'].each do |dat| 
-      specimen = Specimen.new 
+    body['data'].each do |dat|
+      specimen = Specimen.new
       specimen.latitude = lat
       specimen.longitude = lng
       specimen.length_in_mm = dat[0]['data']['lengthInMm']
@@ -28,18 +29,18 @@ class Specimen
   end
 
   def self.fetch_specimens_count(lat, lng)
-    query = "START location=node:locations('*:*') 
-             MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species 
+    query = "START location=node:locations('*:*')
+             MATCH location<-[:COLLECTED_AT]-specimen-[:CLASSIFIED_AS]->species
              WHERE location.latitude=#{lat} AND location.longitude=#{lng} RETURN specimen, species"
     uri = URI(Settings.neo4j_service)
     response = Net::HTTP.post_form(uri, 'query' => query)
     body = JSON.parse response.body
-    body['data'].count 
+    body['data'].count
   end
-  
-  private 
-  
-    def self.fetch_taxonUri(specimen) 
+
+  private
+
+    def self.fetch_taxonUri(specimen)
       speciesExternalId = specimen.speciesExternalId
       if speciesExternalId
         if speciesExternalId.starts_with?("NCBI")
@@ -49,7 +50,7 @@ class Specimen
         elsif speciesExternalId.start_with?("EOL")
           speciesId = speciesExternalId.split(":")[1]
           specimen.taxonUri = "http://www.eol.org/pages/"
-          specimen.taxonUri << speciesId 
+          specimen.taxonUri << speciesId
         elsif speciesExternalId.start_with?("urn:lsid:marinespecies.org:taxname")
            speciesId = speciesExternalId.split(":")[4]
            specimen.taxonUri = "http://www.marinespecies.org/aphia.php?p=taxdetails&id="
@@ -62,30 +63,30 @@ class Specimen
       else
         # a wild guess
         specimen.taxonUri = "http://www.wikipedia.org/wiki/"
-        if not specimen.species.empty?  
+        if not specimen.species.empty?
           specimen.taxonUri << specimen.species.split[0]
         end
-      end 
+      end
     end
 
     def self.fetch_thumbnail(specimen)
-      species = specimen.species  
+      species = specimen.species
       sp = RDFS::Resource.new("http://dbpedia.org/resource/#{species}")
       specimen.thumbnail = sp.dbpedia::thumbnail.uri
-      p "#{specimen.thumbnail}"      
-    rescue => e 
-      p e 
+      p "#{specimen.thumbnail}"
+    rescue => e
+      p e
       #fetch_thumbnail_second_try(specimen)
     end
-      
+
     def self.fetch_thumbnail_second_try(specimen)
-      species = specimen.species.split(" ");      
+      species = specimen.species.split(" ");
       if (!@@no_image_available.include?(species[0]))
         sp = RDFS::Resource.new("http://dbpedia.org/resource/#{species[0]}")
         specimen.thumbnail = sp.dbpedia::thumbnail.uri
-      end      
+      end
     rescue
-      species = specimen.species.split(" ");      
+      species = specimen.species.split(" ");
       @@no_image_available.push species[0]
       p "no thumbnail for #{species[0]}"
     end

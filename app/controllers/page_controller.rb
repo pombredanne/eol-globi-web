@@ -41,8 +41,6 @@ class PageController < ApplicationController
     end
   end
 
-
-
   def search
     @species = params[:species]
     p "#{@species}"

@@ -1,0 +1,25 @@
+
+<div align="center" >
+  <div id="canvas-container"></div>
+</div>
+
+<script type="text/javascript">
+
+    canvas_container = document.getElementById("canvas-container")
+    if (canvas_container == null){
+      alert("Canvas element is missing!")
+      return ;
+    }
+    var wheel = new DependencyWheel.Remote(false, canvas_container, {
+      url: '/foot_chain.json',
+      width: "805",
+      height: "805",
+      infoBox: "infoBox",
+      canvas_id: "canvas",
+      canvas_hover_id: "canvas_hover",
+      onItemClick: function(item, event){
+        window.location.href = "YOUR_NEW_RESOURCE";
+      }
+    } );
+
+</script>

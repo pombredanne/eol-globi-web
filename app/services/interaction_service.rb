@@ -5,7 +5,7 @@ class InteractionService
     preys_url  = "http://trophicgraph.com:8080/taxon/#{species}/preysOn"
     preys_body = HTTParty.get(preys_url, :headers => {"User-Agent" => "torphic" } ).response.body
     preys      = JSON.parse preys_body
-    preys
+    preys['data']
   end
 
   def self.predators( species_name = "Callinectes sapidus" )
@@ -13,7 +13,7 @@ class InteractionService
     predator_url  = "http://trophicgraph.com:8080/taxon/#{species}/preyedUponBy"
     predator_body = HTTParty.get(predator_url, :headers => {"User-Agent" => "torphic" } ).response.body
     predators     = JSON.parse predator_body
-    predators
+    predators['data']
   end
 
 end

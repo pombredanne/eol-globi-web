@@ -8,5 +8,10 @@
 //= require jquery_ujs
 //= require markerclusterer
 //= require gmap
+//= require mootools-1.2-core-nc
+//= require mootools-1.2-more
+//= require canvastext
+//= require excanvas
+//= require dependencywheel
 //= require custom
 //= require_tree .
