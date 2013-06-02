@@ -12,6 +12,7 @@ gem 'rest-client',      '1.6.7'
 gem 'unicorn',          '4.6.2'
 gem 'capistrano',       '2.15.4'
 gem 'rvm-capistrano'
+gem 'httparty'          , '0.11.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
