@@ -14,11 +14,12 @@ This is the source code for [http://TrophicGraph.com](http://trophicgraph.com)
 Stack
 ==
 
-This is the tech. stack of this project: 
+This is the tech. stack of this project:
 
  * Ruby on Rails
  * Google Maps JavaScript API
- * Neo4J REST JSON Backend 
- * RDF 
- 
-Feel free to contribute! 
+ * Neo4J REST JSON Backend
+ * EOL API
+ * RDF
+
+Feel free to contribute!
