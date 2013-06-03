@@ -8,8 +8,8 @@ TrophicWeb::Application.routes.draw do
   get '/location',                :to => 'page#location'
   get '/location_count',          :to => 'page#location_count'
   get '/locations',               :to => 'page#locations'
-  get '/foot_chain',              :to => 'interaction#foot_chain'
-  post '/foot_chain',             :to => 'interaction#foot_chain'
+  get '/food_chain',              :to => 'interaction#food_chain'
+  post '/food_chain',             :to => 'interaction#food_chain'
   get '/thumbnails',              :to => 'images#thumbnails'
 
   get '/about',                   :to => 'page#about'
