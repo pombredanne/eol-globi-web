@@ -2,15 +2,15 @@ source 'http://rubygems.org'
 
 gem 'rails',            '3.2.13'
 gem 'jquery-rails',     '2.2.1'
-gem 'pg',               '0.15.1'
+gem 'pg',               '0.16.0'
 gem 'activerdf',        '1.6.11'
 gem 'activerdf_sparql', '1.3.6'
 gem 'execjs',           '1.4.0'
 gem 'therubyracer',     '0.11.4'
 gem 'rest-client',      '1.6.7'
 # gem 'puma',             '2.0.1'
-gem 'unicorn',          '4.6.2'
-gem 'capistrano',       '2.15.4'
+gem 'unicorn',          '4.6.3'
+gem 'capistrano',       '2.15.5'
 gem 'rvm-capistrano'
 gem 'httparty'          , '0.11.0'
 
@@ -18,12 +18,12 @@ gem 'httparty'          , '0.11.0'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',     '3.2.6'
-  gem 'uglifier'  ,     '2.1.1'
+  gem 'uglifier'  ,     '2.1.2'
 end
 
 group :test do
   gem 'turn', :require => false
-  gem 'rspec-rails',    '2.13.2'
+  gem 'rspec-rails',    '2.14.0'
   gem 'webrat',         '0.7.3'
 end
 
