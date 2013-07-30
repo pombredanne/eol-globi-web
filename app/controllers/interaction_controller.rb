@@ -1,6 +1,6 @@
 class InteractionController < ApplicationController
 
-  def foot_chain
+  def food_chain
     species   = params[:species]
     if species.nil? || species.empty?
       species = "Callinectes sapidus"

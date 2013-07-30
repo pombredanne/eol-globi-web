@@ -1,4 +1,3 @@
-
 var map
 var mapLocation
 var prev_marker
@@ -33,7 +32,8 @@ function initialize() {
         initialize_map_for_location_page(map_for_location_page, params['lat'], params['lng']);
         content = create_study_location_content(params['lat'], params['lng'])
         placeLocationMarker(content, params['lat'], params['lng']);
-    }	
+    }
+    // showRectControl();
 }
 
 function initialize_map_for_landing_page(htmlElement) {
@@ -177,4 +177,26 @@ function fitMarkers(){
             new google.maps.LatLng(neLat,neLng))
         );
     }
+}
+
+/**
+ * Initialize rectangle area picker
+ */
+function showRectControl() {
+    var startBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng( 25.690, -124.746 ), // U.S. without alaska
+        new google.maps.LatLng( 49.506, -66.726 )   // and "islands"
+    );
+
+    var rectangle = new google.maps.Rectangle( {
+        bounds: startBounds,
+        editable: true
+    } );
+
+    rectangle.setMap( map );
+
+    google.maps.event.addListener( rectangle, 'bounds_changed', function() {
+        var newBounds = rectangle.getBounds();
+        console.log( newBounds.toString() );
+    } );
 }
