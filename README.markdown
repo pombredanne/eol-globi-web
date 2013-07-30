@@ -2,8 +2,7 @@ Trophic Graph
 =============
 
 [![Build Status](https://travis-ci.org/reiz/eol-globi-web.png)](https://travis-ci.org/reiz/eol-globi-web)
-[![Dependency Status](http://www.versioneye.com/user/projects/5175aa41b0fd03000200010e/badge.png)](http://www.versioneye.com/user/projects/5175aa41b0fd03000200010e)
-
+[![Dependency Status](http://www.versioneye.com/user/projects/51f75b96632bac0a63000e34/badge.png)](http://www.versioneye.com/user/projects/51f75b96632bac0a63000e34)
 
 Intro
 ==
