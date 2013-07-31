@@ -1,6 +1,20 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# Removed active_record from the list because we don't need any db functionality
+%w(
+  action_controller
+  action_mailer
+  active_resource
+  rails/test_unit
+  sprockets
+).each do |framework|
+  begin
+    require "#{framework}/railtie"
+  rescue LoadError
+  end
+end
+
+#require 'rails/all'
 #require 'active_rdf'
 
 if defined?(Bundler)
