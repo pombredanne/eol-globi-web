@@ -6,10 +6,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require markerclusterer
+//= require google.maps/markerclusterer
+//= require mootools/mootools-1.2-core-nc
+//= require mootools/mootools-1.2-more
 //= require gmap
-//= require mootools-1.2-core-nc
-//= require mootools-1.2-more
 //= require canvastext
 //= require excanvas
 //= require dependencywheel
