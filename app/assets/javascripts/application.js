@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require google.maps/markerclusterer
+//= require google.maps/infobox
 //= require gmap
 //= require custom
 //= require_tree .
