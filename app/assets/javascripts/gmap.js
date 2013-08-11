@@ -2,6 +2,9 @@ var map
 var mapLocation
 var prev_marker
 var markers = new Array();
+var infoBox = null;
+
+var testCoords = { "nw_lat": 41.574361, "nw_lng": -125.533448, "se_lat": 32.750323, "se_lng": -114.744873}
 
 // ***** INIT MAP START ********************************
 
@@ -33,7 +36,7 @@ function initialize() {
         content = create_study_location_content(params['lat'], params['lng'])
         placeLocationMarker(content, params['lat'], params['lng']);
     }
-    // showRectControl();
+    showRectControl();
 }
 
 function initialize_map_for_landing_page(htmlElement) {
@@ -184,8 +187,8 @@ function fitMarkers(){
  */
 function showRectControl() {
     var startBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng( 25.690, -124.746 ), // U.S. without alaska
-        new google.maps.LatLng( 49.506, -66.726 )   // and "islands"
+        new google.maps.LatLng( testCoords.se_lat, testCoords.nw_lng ), // U.S. without alaska
+        new google.maps.LatLng( testCoords.nw_lat, testCoords.se_lng )   // and "islands"
     );
 
     var rectangle = new google.maps.Rectangle( {
@@ -196,7 +199,72 @@ function showRectControl() {
     rectangle.setMap( map );
 
     google.maps.event.addListener( rectangle, 'bounds_changed', function() {
-        var newBounds = rectangle.getBounds();
-        console.log( newBounds.toString() );
+        var newBounds = rectangle.getBounds(),
+            transformedBoundsCoordinates = {
+                nw_lat: newBounds.getNorthEast().lat,
+                nw_lng: newBounds.getSouthWest().lng,
+                se_lat: newBounds.getSouthWest().lat,
+                se_lng: newBounds.getNorthEast().lng
+            };
+
+
+
+        var ids = {"graphId": "graph-container", "legendId": "legend-container"};
+
+        showInfoBox( newBounds.getNorthEast() );
+        globi.addInteractionGraph( testCoords, ids, 1000, 500 );
+
+        //console.log( newBounds.toString() );
+
     } );
+}
+
+function showInfoBox( position )
+{
+    if ( infoBox === null ) {
+        infoBox = new InfoBox( getInfoBoxSettings());
+
+        var boxContentContainer = [
+            '<div id="interaction-container">',
+                '<div id="graph-container" style="width: 80%; float: left;">',
+                '</div>',
+                '<div id="legend-container" style="width: 20%; float: left; margin-top: -25px;">',
+                '</div>',
+            '</div>'
+        ].join( '' );
+
+
+        infoBox.setContent( boxContentContainer );
+    }
+
+    infoBox.setMap( map );
+
+    infoBox.setPosition( position );
+
+    infoBox.draw();
+}
+
+function getInfoBoxSettings()
+{
+    return {
+        disableAutoPan: false
+        ,maxWidth: 0
+        ,zIndex: null
+        ,boxStyle: {
+            background: "white"
+            ,opacity: 0.95
+            ,padding: '5px'
+            ,border: 'solid 1px #000'
+            ,width: '1200px'
+            ,height: '500px'
+        }
+        ,closeBoxMargin: "10px 2px 2px 2px"
+        ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+        ,infoBoxClearance: new google.maps.Size(10, 10)
+        ,isHidden: false
+        ,pane: "floatPane"
+        ,enableEventPropagation: false
+        ,alignBottom: true
+
+    };
 }
