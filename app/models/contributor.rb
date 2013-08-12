@@ -8,6 +8,7 @@ class Contributor
 
 	def self.fetch_contributors
 		body = executeQuery
+    p 'contributors: [' + body + ']'
 
 		contributors = Array.new
 		body['data'].each do |dat| 
@@ -29,7 +30,7 @@ class Contributor
 	def self.executeQuery
 		uri = URI(Settings.globi_rest_service + 'contributors')
 		response = Net::HTTP.get_response( uri )
-		body = JSON.parse response.body
+    JSON.parse response.body
 	end
 
 end
