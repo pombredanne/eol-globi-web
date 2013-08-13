@@ -6,7 +6,12 @@ class LocationTest < ActiveSupport::TestCase
 		loc.latitude = 1.2
 		loc.longitude = 2.1
 		assert_equal(loc.latitude, 1.2)
-	end
+  end
+
+  test 'fetch locations' do
+    locations = Location.fetch_locations
+    assert locations > 0
+  end
 
 	test 'parse locations' do
 		data = [[1,2], [3.7,4.9], [5,6]]

@@ -3,8 +3,6 @@ source 'http://rubygems.org'
 gem 'rails',            '3.2.13'
 gem 'jquery-rails',     '2.2.1'
 gem 'pg',               '0.16.0'
-gem 'activerdf',        '1.6.11'
-gem 'activerdf_sparql', '1.3.6'
 gem 'execjs',           '1.4.0'
 gem 'therubyracer',     '0.11.4'
 gem 'rest-client',      '1.6.7'
@@ -23,8 +21,8 @@ end
 
 group :test do
   gem 'turn', :require => false
-  gem 'rspec-rails',    '2.14.0'
   gem 'webrat',         '0.7.3'
+  gem 'minitest-reporters', '>= 0.5.0'
 end
 
 # To use ActiveModel has_secure_password
