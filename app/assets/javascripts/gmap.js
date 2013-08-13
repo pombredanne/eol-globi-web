@@ -227,7 +227,7 @@ function OverlaySwitcher( map, div) {
     controlDiv.appendChild( switcherUI );
 
     var switcherText = document.createElement( 'div' )
-    switcherText.innerHTML = '<img src="assets/icon_area.png" />';
+    switcherText.innerHTML = '<img src="images/icon_area.png" />';
     switcherUI.appendChild( switcherText );
 
     google.maps.event.addDomListener( switcherUI, 'click', function() {
@@ -236,7 +236,7 @@ function OverlaySwitcher( map, div) {
             case 'marker':
                 control.state_ = 'rectangle';
                 switcherUI.title = 'Show Markers';
-                switcherText.innerHTML = '<img src="assets/icon_marker.png" />';
+                switcherText.innerHTML = '<img src="images/icon_marker.png" />';
                 showRectControl();
                 hideMarkerClusterer();
 
@@ -244,7 +244,7 @@ function OverlaySwitcher( map, div) {
             case 'rectangle':
                 control.state_ = 'marker'
                 switcherUI.title = 'Show Area Picker';
-                switcherText.innerHTML = '<img src="assets/icon_area.png" />';
+                switcherText.innerHTML = '<img src="images/icon_area.png" />';
                 hideRectControl();
                 showMarkerClusterer();
                 break;
