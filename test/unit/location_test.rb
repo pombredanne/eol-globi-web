@@ -10,7 +10,7 @@ class LocationTest < ActiveSupport::TestCase
 
   test 'fetch locations' do
     locations = Location.fetch_locations
-    assert locations > 0
+    assert locations.length > 0
   end
 
 	test 'parse locations' do
