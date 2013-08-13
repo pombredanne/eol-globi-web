@@ -8,11 +8,9 @@ class Contributor
 
 	def self.fetch_contributors
 		body = executeQuery
-    p 'contributors: [' + body + ']'
 
 		contributors = Array.new
 		body['data'].each do |dat| 
-			p dat
 			contributor = Contributor.new
 			contributor.institution = dat[0]
 			contributor.timePeriod = dat[1]
