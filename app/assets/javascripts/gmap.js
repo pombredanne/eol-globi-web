@@ -3,6 +3,8 @@ var mapLocation
 var prev_marker
 var markers = new Array();
 var infoBox = null;
+var areaPicker = null;
+var markerClusterer = null;
 
 var testCoords = { "nw_lat": 41.574361, "nw_lng": -125.533448, "se_lat": 32.750323, "se_lng": -114.744873}
 
@@ -25,7 +27,7 @@ function initialize() {
                     content = create_location_content(latitude, longitude, count, "link");
                     placeMarker(content, latitude, longitude);
                 }
-                clusterMarker();
+                showMarkerClusterer();
             }
         } );
     }		
@@ -36,7 +38,13 @@ function initialize() {
         content = create_study_location_content(params['lat'], params['lng'])
         placeLocationMarker(content, params['lat'], params['lng']);
     }
-    showRectControl();
+
+    var switcherControlDiv = document.createElement('div');
+    var switcherControl = new OverlaySwitcher( map, switcherControlDiv );
+
+    switcherControlDiv.index = 1;
+    map.controls[ google.maps.ControlPosition.RIGHT_CENTER ].push( switcherControlDiv );
+
 }
 
 function initialize_map_for_landing_page(htmlElement) {
@@ -144,7 +152,25 @@ function placeManualMarker(location) {
 
 function clusterMarker(){
     var mcOptions = {gridSize: 40, maxZoom: 0};
-    new MarkerClusterer(map, markers, mcOptions);
+    markerClusterer = new MarkerClusterer(map, markers, mcOptions);
+}
+
+function hideMarkerClusterer()
+{
+    markerClusterer.resetViewport( true );
+}
+
+function showMarkerClusterer()
+{
+    if ( markerClusterer === null ) {
+        var mcOptions = {gridSize: 40, maxZoom: 0};
+        markerClusterer = new MarkerClusterer(map, markers, mcOptions);
+    }
+    else
+    {
+        markerClusterer.redraw();
+    }
+
 }
 
 function fitMarkers(){
@@ -182,41 +208,93 @@ function fitMarkers(){
     }
 }
 
+function OverlaySwitcher( map, div) {
+    var controlDiv = div,
+        control = this;
+
+    control.state_ = 'marker';
+    controlDiv.style.margin = '3px';
+    controlDiv.style.padding = '3px';
+    controlDiv.style.backgroundColor = 'white';
+    controlDiv.style.border = '1px solid #000';
+    controlDiv.style.width = '35px';
+    controlDiv.style.height = '21px';
+    controlDiv.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.4)';
+    controlDiv.style.cursor = 'pointer';
+
+    var switcherUI = document.createElement( 'div' );
+    switcherUI.title = 'Show Area Picker';
+    controlDiv.appendChild( switcherUI );
+
+    var switcherText = document.createElement( 'div' )
+    switcherText.innerHTML = '<img src="assets/icon_area.png" />';
+    switcherUI.appendChild( switcherText );
+
+    google.maps.event.addDomListener( switcherUI, 'click', function() {
+        console.log( 'click', control.state_ );
+        switch ( control.state_ ) {
+            case 'marker':
+                control.state_ = 'rectangle';
+                switcherUI.title = 'Show Markers';
+                switcherText.innerHTML = '<img src="assets/icon_marker.png" />';
+                showRectControl();
+                hideMarkerClusterer();
+
+                break;
+            case 'rectangle':
+                control.state_ = 'marker'
+                switcherUI.title = 'Show Area Picker';
+                switcherText.innerHTML = '<img src="assets/icon_area.png" />';
+                hideRectControl();
+                showMarkerClusterer();
+                break;
+        }
+
+    } );
+}
+
+function hideRectControl() {
+    areaPicker.setMap( null );
+}
+
 /**
  * Initialize rectangle area picker
  */
 function showRectControl() {
-    var startBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng( testCoords.se_lat, testCoords.nw_lng ), // U.S. without alaska
-        new google.maps.LatLng( testCoords.nw_lat, testCoords.se_lng )   // and "islands"
-    );
+    if ( areaPicker === null ) {
+        var startBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng( testCoords.se_lat, testCoords.nw_lng ), // U.S. without alaska
+            new google.maps.LatLng( testCoords.nw_lat, testCoords.se_lng )   // and "islands"
+        );
 
-    var rectangle = new google.maps.Rectangle( {
-        bounds: startBounds,
-        editable: true
-    } );
+        areaPicker = new google.maps.Rectangle( {
+            bounds: startBounds,
+            editable: true
+        } );
 
-    rectangle.setMap( map );
+        areaPicker.setMap( map );
 
-    google.maps.event.addListener( rectangle, 'bounds_changed', function() {
-        var newBounds = rectangle.getBounds(),
-            transformedBoundsCoordinates = {
-                nw_lat: newBounds.getNorthEast().lat,
-                nw_lng: newBounds.getSouthWest().lng,
-                se_lat: newBounds.getSouthWest().lat,
-                se_lng: newBounds.getNorthEast().lng
-            };
+        google.maps.event.addListener( areaPicker, 'bounds_changed', function() {
+            var newBounds = areaPicker.getBounds(),
+                transformedBoundsCoordinates = {
+                    nw_lat: newBounds.getNorthEast().lat,
+                    nw_lng: newBounds.getSouthWest().lng,
+                    se_lat: newBounds.getSouthWest().lat,
+                    se_lng: newBounds.getNorthEast().lng
+                };
 
 
 
-        var ids = {"graphId": "graph-container", "legendId": "legend-container"};
+            var ids = {"graphId": "graph-container", "legendId": "legend-container"};
 
-        showInfoBox( newBounds.getNorthEast() );
-        globi.addInteractionGraph( testCoords, ids, 1000, 500 );
+            showInfoBox( newBounds.getNorthEast() );
+            globi.addInteractionGraph( testCoords, ids, 1000, 500 );
 
-        //console.log( newBounds.toString() );
+            //console.log( newBounds.toString() );
 
-    } );
+        } );
+    }
+    areaPicker.setMap( map );
 }
 
 function showInfoBox( position )
@@ -252,7 +330,7 @@ function getInfoBoxSettings()
         ,zIndex: null
         ,boxStyle: {
             background: "white"
-            ,opacity: 0.95
+            ,opacity: 0.99
             ,padding: '5px'
             ,border: 'solid 1px #000'
             ,width: '1200px'
