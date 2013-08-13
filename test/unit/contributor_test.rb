@@ -5,10 +5,10 @@ class ContributorTest < ActiveSupport::TestCase
 		contributors = Contributor.fetch_contributors
 		assert contributors.length > 0
     contributors.each do |contributor|
-      assert_not_equal contributor.name, 'null'
-      assert_not_equal contributor.institution, 'null'
-      assert_not_equal contributor.timePeriod, 'null'
-      assert_not_equal contributor.studyTitle, 'null'
+      assert_not_nil contributor.name
+      assert_not_nil contributor.institution
+      assert_not_nil contributor.timePeriod
+      assert_not_nil contributor.studyTitle
     end
 	end
 
