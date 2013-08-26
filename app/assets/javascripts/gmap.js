@@ -288,7 +288,7 @@ console.log( transformedBoundsCoordinates );
 
 
             var contentString = '<div>'+
-                '<a href="interactions?'
+                '<a target="_blank" href="interactions?'
                     + 'nw_lat=' + transformedBoundsCoordinates.nw_lat
                     + '&nw_lng=' + transformedBoundsCoordinates.nw_lng
                     + '&se_lat=' + transformedBoundsCoordinates.se_lat
