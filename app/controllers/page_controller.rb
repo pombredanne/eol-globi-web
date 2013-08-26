@@ -50,6 +50,20 @@ class PageController < ApplicationController
     @contributors = Contributor.fetch_contributors
   end
 
+  def interactions
+    @nw_lat = params[:nw_lat]
+    @nw_lng = params[:nw_lng]
+    @se_lat = params[:se_lat]
+    @se_lng = params[:se_lng]
+
+    unless @nw_lat && @nw_lng && @se_lat && @se_lng
+      @nw_lat = 41.574361
+      @nw_lng = -125.533448
+      @se_lat = 32.750323
+      @se_lng = -114.744873
+    end
+    end
+
   def terms
   end
 

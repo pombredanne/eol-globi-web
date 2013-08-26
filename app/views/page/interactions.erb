@@ -1,0 +1,68 @@
+<div align="center">
+  <table>
+    <tr>
+      <td height="500">
+        <span class="chart" id="interaction_graph"/>
+      </td>
+      <td>
+        <span id="interaction_graph_legend"/>
+      </td>
+    </tr>
+    <td width='800' height="36">
+      <b>selected interactions</b>
+      <span id="selected-interactions"/>
+    </td>
+    </tr>
+    <tr>
+      <td>
+
+      </td>
+    </tr>
+
+  </table>
+</div>
+<script type="text/javascript">
+    var EOL = EOL || {};
+
+    EOL.interactions = {};
+
+    EOL.interactions.options = {
+        location: {
+            nw_lat: <%=@nw_lat %>,
+            nw_lng: <%=@nw_lng %>,
+            se_lat: <%=@se_lat %>,
+            se_lng: <%=@se_lng %>
+        },
+        width: 800,
+        height: 500,
+        sourceTaxa: ['Animalia'],
+        targetTaxa: ['Insecta', 'Aves']
+    };
+
+  // event emitter (ee) object is returned for client to respond to events
+  var ee = globi.addInteractionGraph( EOL.interactions.options );
+
+  // interaction data is received and has been rendered
+  ee.on('ready', function () {
+      ee.appendGraphTo(document.querySelector('#interaction_graph'));
+      ee.appendLegendTo(document.querySelector('#interaction_graph_legend'));
+  });
+
+    // specific interactions have been selected by user
+    ee.on('select', function (interactions) {
+        // use d3 to render interaction data into html div elements
+        globi.d3.selectAll('#selected-interactions').selectAll('div')
+                .data(interactions)
+                .enter().append('div').text(function (d) {
+                    // use interaction data to do something meaningful
+                    return '[' + d.source.name + ' (' + d.source.id + ')]-[:'
+                            + d.type
+                            + ']->[' + d.target.name + ' (' + d.target.id + ')]';
+                });
+    });
+
+    ee.on('deselect', function () {
+        // remove previously rendered interaction information
+        globi.d3.selectAll('#selected-interactions').selectAll('div').remove();
+    });
+</script>
