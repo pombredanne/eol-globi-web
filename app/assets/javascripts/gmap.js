@@ -5,6 +5,7 @@ var markers = new Array();
 var infoBox = null;
 var areaPicker = null;
 var markerClusterer = null;
+var infoWindow = new google.maps.InfoWindow({ content: '' });
 
 var testCoords = { "nw_lat": 41.574361, "nw_lng": -125.533448, "se_lat": 32.750323, "se_lng": -114.744873}
 
@@ -282,10 +283,7 @@ function showRectControl() {
                     se_lng: newBounds.getNorthEast().lng()
                 };
 
-console.log( transformedBoundsCoordinates );
-
             var ids = {"graphId": "graph-container", "legendId": "legend-container"};
-
 
             var contentString = '<div>'+
                 '<a target="_blank" href="interactions?'
@@ -297,14 +295,12 @@ console.log( transformedBoundsCoordinates );
                 '</a><br/>' +
                 '</div>';
 
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
 
+            infoWindow.close();
 
-            infowindow.setPosition( newBounds.getCenter() );
-
-            infowindow.open(map);
+            infoWindow.setContent( contentString );
+            infoWindow.setPosition( newBounds.getCenter() );
+            infoWindow.open(map);
 
 
 
