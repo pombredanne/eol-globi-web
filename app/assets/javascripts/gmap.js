@@ -231,7 +231,6 @@ function OverlaySwitcher( map, div) {
     switcherUI.appendChild( switcherText );
 
     google.maps.event.addDomListener( switcherUI, 'click', function() {
-        console.log( 'click', control.state_ );
         switch ( control.state_ ) {
             case 'marker':
                 control.state_ = 'rectangle';
@@ -277,18 +276,40 @@ function showRectControl() {
         google.maps.event.addListener( areaPicker, 'bounds_changed', function() {
             var newBounds = areaPicker.getBounds(),
                 transformedBoundsCoordinates = {
-                    nw_lat: newBounds.getNorthEast().lat,
-                    nw_lng: newBounds.getSouthWest().lng,
-                    se_lat: newBounds.getSouthWest().lat,
-                    se_lng: newBounds.getNorthEast().lng
+                    nw_lat: newBounds.getNorthEast().lat(),
+                    nw_lng: newBounds.getSouthWest().lng(),
+                    se_lat: newBounds.getSouthWest().lat(),
+                    se_lng: newBounds.getNorthEast().lng()
                 };
 
-
+console.log( transformedBoundsCoordinates );
 
             var ids = {"graphId": "graph-container", "legendId": "legend-container"};
 
-            showInfoBox( newBounds.getNorthEast() );
-            globi.addInteractionGraph( testCoords, ids, 1000, 500 );
+
+            var contentString = '<div>'+
+                '<a href="interactions?'
+                    + 'nw_lat=' + transformedBoundsCoordinates.nw_lat
+                    + '&nw_lng=' + transformedBoundsCoordinates.nw_lng
+                    + '&se_lat=' + transformedBoundsCoordinates.se_lat
+                    + '&se_lng=' + transformedBoundsCoordinates.se_lng
+                +'"><span>show interactions</span></br>' +
+                '</a><br/>' +
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+
+            infowindow.setPosition( newBounds.getCenter() );
+
+            infowindow.open(map);
+
+
+
+//            showInfoBox( newBounds.getNorthEast() );
+//            globi.addInteractionGraph( testCoords, ids, 1000, 500 );
 
             //console.log( newBounds.toString() );
 
