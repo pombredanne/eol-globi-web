@@ -1,7 +1,9 @@
 (function(e){if("function"==typeof bootstrap)bootstrap("globi",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeGlobi=e}else"undefined"!=typeof window?window.globi=e():global.globi=e()})(function(){var define,ses,bootstrap,module,exports;
 return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
-var d3 = require("d3");
-var globiData = require("globi-data");
+var d3 = require('d3');
+var globiData = require('globi-data');
+var EventEmitter = require('events').EventEmitter;
+
 
 var globi = {};
 globi.d3 = d3;
@@ -13,43 +15,39 @@ globi.globiData = globiData;
 // jack - introduce auto-complete, provide feedbackafter submit a search, fuzzy search
 // ryan - top 5 searches
 // bemson - drop-down
-// matt - provide example in readme.md 
-// ryan - test
 // substack - populate full data in server replies to reduce round trips
-// Substack/sorta - good example of dynamically insert, let consumer attach content whenever they want
-// Ryan/ Bemsom - encapsulate, pass in functions
 
 globi.addTaxonInfo = function (scientificName, id, onClickScientificCallback) {
     var imageCallback = function (error, json) {
         if (!error) {
             if (json.thumbnailURL) {
                 var imgId = d3.select(id)
-                    .append("span")
+                    .append('span')
 
-                var table = imgId.append("table");
+                var table = imgId.append('table');
 
 
                 if (json.commonName && json.scientificName && json.infoURL) {
-                    var img = table.append("tr").append("td")
-                        .append("img")
-                        .attr("src", json.thumbnailURL);
+                    var img = table.append('tr').append('td')
+                        .append('img')
+                        .attr('src', json.thumbnailURL);
 
                     if (onClickScientificCallback) {
                         img
-                            .on("click", function (d) {
+                            .on('click', function (d) {
                                 onClickScientificCallback(json.scientificName);
                             });
                     }
 
-                    table.append("tr").append("td")
+                    table.append('tr').append('td')
                         .text(json.commonName)
-                        .append("a")
-                        .attr("href", json.infoURL)
-                        .attr("target", "_blank")
-                        .text(" >");
+                        .append('a')
+                        .attr('href', json.infoURL)
+                        .attr('target', '_blank')
+                        .text(' >');
 
-                    var scientificNameCell = table.append("tr").append("td");
-                    scientificNameCell.html("<i>" + json.scientificName + "</i>");
+                    var scientificNameCell = table.append('tr').append('td');
+                    scientificNameCell.html('<i>' + json.scientificName + '</i>');
                 }
             }
         }
@@ -62,9 +60,9 @@ globi.viewInteractions = function (id, interactionType, sourceTaxonScientificNam
 
     var renderInteractions = function (error, json) {
         if (!error) {
-            var htmlText = "<b>" + interactionDescription + "</b>";
+            var htmlText = '<b>' + interactionDescription + '</b>';
             if (json && json.length == 0) {
-                htmlText += " <b> nothing</b>";
+                htmlText += ' <b> nothing</b>';
             }
             d3.select(id).html(htmlText);
 
@@ -78,11 +76,11 @@ globi.viewInteractions = function (id, interactionType, sourceTaxonScientificNam
 };
 
 var matchAgainstTaxonomy = function (node) {
-    return node.path && "no:match" != node.path;
+    return node.path && 'no:match' != node.path;
 }
 
 var indexForNode = function (node) {
-    return node.path + "_" + node.name;
+    return node.path + '_' + node.name;
 };
 
 var classnameForNode = function (node) {
@@ -97,15 +95,15 @@ var parse = function (response, interactions, nodes) {
             var source = inter.source.name;
 
             var sourceIndex = indexForNode(inter.source);
-            nodes[sourceIndex] = {"name": source, "id": inter.source.id, "path": inter.source.path};
+            nodes[sourceIndex] = {name: source, id: inter.source.id, path: inter.source.path};
 
             var target = inter.target.name;
             var targetIndex = indexForNode(inter.target);
-            nodes[targetIndex] = {"name": target, "id": inter.target.id, "path": inter.target.path};
+            nodes[targetIndex] = {name: target, id: inter.target.id, path: inter.target.path};
 
-            var type = inter.interaction_type;
+            var type = inter.type;
             var interactionIndex = source + '-' + type + '-' + target;
-            interactions[interactionIndex] = {'source': nodes[sourceIndex], 'type': type, 'target': nodes[targetIndex]};
+            interactions[interactionIndex] = {source: nodes[sourceIndex], type: type, target: nodes[targetIndex]};
         }
     }
 };
@@ -123,19 +121,19 @@ taxonColorMap.Reptilia = 'yellow';
 taxonColorMap.Bacteria = 'magenta';
 taxonColorMap.other = 'gray';
 
-var addLegend = function (id, colorMap, width, height) {
+var addLegend = function (legendDiv, colorMap, width, height) {
     var taxonRankColors = [];
     var i = 1;
     for (var taxon_rank in colorMap) {
         if (colorMap.hasOwnProperty(taxon_rank)) {
-            taxonRankColors.push({"rank": taxon_rank, "color": colorMap[taxon_rank], "id": i });
+            taxonRankColors.push({rank: taxon_rank, color: colorMap[taxon_rank], id: i });
             i++;
         }
     }
 
-    var legend = d3.select("#" + id).append("svg")
-        .attr("width", width / 5)
-        .attr("height", height);
+    var legend = d3.select(legendDiv).append('svg')
+        .attr('width', width / 5)
+        .attr('height', height);
 
     var radius = height / taxonRankColors.length / 4;
     var yOffset = (height - 2 * radius * taxonRankColors.length) / taxonRankColors.length / 2;
@@ -145,16 +143,16 @@ var addLegend = function (id, colorMap, width, height) {
         .data(taxonRankColors)
         .enter()
         .append('circle')
-        .attr("style", function (d) {
-            return "fill:" + d.color;
+        .attr('style', function (d) {
+            return 'fill:' + d.color;
         })
-        .attr("cx", function (d) {
+        .attr('cx', function (d) {
             return xOffset + radius;
         })
-        .attr("cy", function (d) {
+        .attr('cy', function (d) {
             return height / 50 + radius + d.id * (yOffset + (radius * 2));
         })
-        .attr("r", function (d) {
+        .attr('r', function (d) {
             return radius;
         });
 
@@ -191,129 +189,138 @@ var pathColor = function (d) {
 };
 
 var nodeStyle = function (d) {
-    return "fill: " + pathColor(d) + "; stroke: blue; opacity: 0.5;";
+    return 'fill: ' + pathColor(d) + '; stroke: blue; opacity: 0.5;';
 };
 
 var nodeStyleActive = function (d) {
-    return "fill: " + pathColor(d) + "; stroke: blue; opacity: 1.0;";
+    return 'fill: ' + pathColor(d) + '; stroke: blue; opacity: 1.0;';
 };
 
 
 var lineStyle = function (d) {
-    return "stroke:" + (d.type == 'ATE' ? "lightgreen" : "pink") + "; fill:none; opacity:0.1;";
+    return 'stroke:' + (d.type == 'ATE' ? 'lightgreen' : 'pink') + '; fill:none; opacity:0.5;';
 };
 
 var lineStyleActive = function (d) {
-    return "stroke:" + (d.type == 'ATE' ? "green" : "red") + "; fill:none; opacity:0.9;";
+    return 'stroke:' + (d.type == 'ATE' ? 'green' : 'red') + "; fill:none; opacity:0.9;";
 };
 
 
-var activateTaxonNodesAndLinks = function (svg, d, interactionDirection) {
-    svg.selectAll("." + interactionDirection.start + "." + classnameForNode(d))
-        .attr("style", nodeStyleActive);
-    svg.selectAll(".link." + interactionDirection.start + "-" + classnameForNode(d))
-        .attr("style", lineStyleActive);
+var activateTaxonNodesAndLinks = function (svg, d, interactionDirection, ee) {
+    svg.selectAll('.' + interactionDirection.start + '.' + classnameForNode(d))
+        .attr('style', nodeStyleActive);
+    svg.selectAll('.link.' + interactionDirection.start + '-' + classnameForNode(d))
+        .attr('style', lineStyleActive);
 
-    var linkArray = svg.selectAll(".link." + interactionDirection.start + "-" + classnameForNode(d)).data();
-
-    var targetNames = '';
-    if (linkArray.length > 1) {
-        targetNames = linkArray[0][interactionDirection.finish].name;
-    }
-    for (var i = 1; i < linkArray.length; i++) {
-        targetNames += ", ";
-        targetNames += linkArray[i][interactionDirection.finish].name;
-    }
-
-    d3.selectAll("#" + interactionDirection.finish + "-names").append("span").text(targetNames);
-    d3.selectAll("#" + interactionDirection.start + "-names").append("span").text(d.name);
+    var interactions = svg.selectAll('.link.' + interactionDirection.start + '-' + classnameForNode(d)).data();
+    ee.emit('select', interactions);
 };
 
-var addSourceTaxonNodes = function (svg, nodeArray) {
+var addSourceTaxonNodes = function (svg, nodeArray, ee) {
     svg.selectAll('.source')
         .data(nodeArray)
         .enter()
-        .append("circle")
-        .attr("class", function (d) {
-            return "source " + classnameForNode(d);
+        .append('circle')
+        .attr('class', function (d) {
+            return 'source ' + classnameForNode(d);
         })
-        .attr("style", nodeStyle)
-        .attr("cx", function (d) {
+        .attr('style', nodeStyle)
+        .attr('cx', function (d) {
             return d.x;
         })
-        .attr("cy", function (d) {
+        .attr('cy', function (d) {
             return d.y1;
         })
-        .attr("r", function (d) {
+        .attr('r', function (d) {
             return d.radius;
         })
-        .on("mouseover", function (d) {
-            activateTaxonNodesAndLinks(svg, d, {"start": "source", "finish": "target"});
+        .on('mouseover', function (d) {
+            activateTaxonNodesAndLinks(svg, d, {start: 'source', finish: 'target'}, ee);
             return d.name;
         })
         .on("mouseout", function (d) {
-            svg.selectAll(".source." + classnameForNode(d)).attr("style", nodeStyle);
-            svg.selectAll(".link.source-" + classnameForNode(d)).attr("style", lineStyle);
-            d3.selectAll("#source-taxon").selectAll("span").remove();
-            d3.selectAll("#source-names").selectAll("span").remove();
-            d3.selectAll("#target-names").selectAll("span").remove();
+            svg.selectAll('.source.' + classnameForNode(d)).attr('style', nodeStyle);
+            svg.selectAll('.link.source-' + classnameForNode(d)).attr('style', lineStyle);
+            d3.selectAll('#source-taxon').selectAll('span').remove();
+            d3.selectAll('#source-names').selectAll('span').remove();
+            d3.selectAll('#target-names').selectAll('span').remove();
+            ee.emit('deselect');
             return d.name;
         });
 };
 
-var addTargetTaxonNodes = function (svg, nodeArray, colorMap) {
+var addTargetTaxonNodes = function (svg, nodeArray, ee) {
     svg.selectAll('.target')
         .data(nodeArray)
         .enter()
-        .append("circle")
-        .attr("class", function (d) {
-            return "target " + classnameForNode(d);
+        .append('circle')
+        .attr('class', function (d) {
+            return 'target ' + classnameForNode(d);
         })
-        .attr("style", nodeStyle)
-        .attr("cx", function (d) {
+        .attr('style', nodeStyle)
+        .attr('cx', function (d) {
             return d.x;
         })
-        .attr("cy", function (d) {
+        .attr('cy', function (d) {
             return d.y2;
         })
-        .attr("r", function (d) {
+        .attr('r', function (d) {
             return d.radius;
         })
-        .on("mouseover", function (d) {
-            activateTaxonNodesAndLinks(svg, d, {"start": "target", "finish": "source"});
+        .on('mouseover', function (d) {
+            activateTaxonNodesAndLinks(svg, d, {start: 'target', finish: 'source'}, ee);
             return d.name;
         })
         .on("mouseout", function (d) {
-            svg.selectAll(".target." + classnameForNode(d)).attr("style", nodeStyle);
-            svg.selectAll(".link.target-" + classnameForNode(d)).attr("style", lineStyle);
-            d3.selectAll("#target-taxon").selectAll("span").remove();
-            d3.selectAll("#target-names").selectAll("span").remove();
-            d3.selectAll("#source-names").selectAll("span").remove();
+            svg.selectAll('.target.' + classnameForNode(d)).attr('style', nodeStyle);
+            svg.selectAll('.link.target-' + classnameForNode(d)).attr('style', lineStyle);
+            d3.selectAll('#target-taxon').selectAll('span').remove();
+            d3.selectAll('#target-names').selectAll('span').remove();
+            d3.selectAll('#source-names').selectAll('span').remove();
+            ee.emit('deselect');
             return d.name;
         });
 };
 
-var addInteraction = function (svg, interactionArray) {
-    svg.selectAll(".link")
+var addInteraction = function (svg, interactionArray, ee) {
+    svg.selectAll('.link')
         .data(interactionArray)
         .enter()
-        .append("path")
-        .attr("class", function (d) {
-            return "link " + "source-" + classnameForNode(d.source) + " target-" + classnameForNode(d.target);
+        .append('path')
+        .attr('class', function (d) {
+            return 'link source-' + classnameForNode(d.source) + ' target-' + classnameForNode(d.target);
         })
-        .attr("style", lineStyle)
+        .attr('style', lineStyle)
         .attr('d', function (d) {
-            return "M" + d.source.x + " " + d.source.y1 + " L" + d.target.x + " " + d.target.y2;
+            return 'M' + d.source.x + ' ' + d.source.y1 + ' L' + d.target.x + ' ' + d.target.y2;
+        })
+        .on('mouseover', function (d) {
+            d3.select(this).attr('style', lineStyleActive(d));
+            ee.emit('select', [d]);
+            return d;
+        })
+        .on('mouseout', function (d) {
+            d3.select(this).attr('style', lineStyle(d));
+            ee.emit('deselect');
+            return d;
         });
 };
 
 
-globi.addInteractionGraph = function (location, ids, width, height) {
-    var svg = d3.select("#" + ids.graphId).append("svg")
-        .attr("width", width)
-        .attr("height", height);
+globi.addInteractionGraph = function (options) {
+    var ee = new EventEmitter();
 
-    addLegend(ids.legendId, taxonColorMap, width, height);
+    var legendDiv = document.createElement('div');
+    legendDiv.setAttribute('class', 'globi-interaction-graph-legend');
+    addLegend(legendDiv, taxonColorMap, options.width, options.height);
+
+    var graphDiv = document.createElement('div');
+    graphDiv.setAttribute('class', 'globi-interaction-graph');
+
+    var svg = d3.select(graphDiv).append('svg')
+        .attr('width', options.width)
+        .attr('height', options.height);
+
 
     var callback = function (error, response) {
         if (!error) {
@@ -338,15 +345,15 @@ globi.addInteractionGraph = function (location, ids, width, height) {
             var taxonNodes = [];
             for (var nodeKey in nodeKeys) {
                 var key = nodeKeys[nodeKey];
-                var widthPerNode = width / (number_of_nodes + 1);
+                var widthPerNode = options.width / (number_of_nodes + 1);
                 nodes[key].x = widthPerNode + i * widthPerNode;
                 /**
                  * @gb: Added a second ordinate to fix y-scale problem
                  * * Additionally this speeds up rendering because we don't need Bezier ploting in #addIteraction anymore
                  */
                 nodes[key].y1 = widthPerNode;
-                nodes[key].y2 = height - widthPerNode;
-                nodes[key].radius = widthPerNode;
+                nodes[key].y2 = options.height - widthPerNode;
+                nodes[key].radius = widthPerNode / 2.0;
                 nodes[key].color = "pink";
                 taxonNodes.push(nodes[key]);
                 i = i + 1;
@@ -359,14 +366,22 @@ globi.addInteractionGraph = function (location, ids, width, height) {
                 interactionsArray.push(interactions[key]);
             }
 
-            addSourceTaxonNodes(svg, taxonNodes);
-            addTargetTaxonNodes(svg, taxonNodes, taxonColorMap);
-            addInteraction(svg, interactionsArray);
+            addSourceTaxonNodes(svg, taxonNodes, ee);
+            addTargetTaxonNodes(svg, taxonNodes, ee);
+            addInteraction(svg, interactionsArray, ee);
         }
+        ee.emit('ready');
     };
 
-    var search = {"location": location}
-    globiData.findSpeciesInteractions(search, callback);
+    globiData.findSpeciesInteractions(options, callback);
+
+    ee.appendGraphTo = function (target) {
+        target.appendChild(graphDiv);
+    };
+    ee.appendLegendTo = function (target) {
+        target.appendChild(legendDiv);
+    }
+    return ee;
 };
 
 module.exports = globi;
@@ -374,7 +389,7 @@ module.exports = globi;
 
 
 
-},{"d3":3,"globi-data":4}],2:[function(require,module,exports){
+},{"d3":3,"events":5,"globi-data":4}],2:[function(require,module,exports){
 d3 = function() {
   var d3 = {
     version: "3.2.7"
@@ -9177,43 +9192,59 @@ module.exports = d3;
 
 })()
 },{"./d3":2}],4:[function(require,module,exports){
-var d3 = require("d3");
+var d3 = require('d3');
 
 var globiData = {};
 globiData.d3 = d3;
 
-var urlPrefix = "http://trophicgraph.com:8080";
+var urlPrefix = 'http://trophicgraph.com:8080';
 
-var locationQuery = function (location) {
-    var locationQuery = "";
-    for (var elem in location) {
-        locationQuery += elem + "=" + location[elem] + "&";
-    }
-    return locationQuery;
-}
 
 
 globiData.urlForTaxonInteractionQuery = function (search) {
     var uri = urlPrefix;
 
     if (search.sourceTaxonScientificName) {
-        uri = uri + "/taxon/" + encodeURIComponent(search.sourceTaxonScientificName) + "/" + search.interactionType;
+        uri = uri + '/taxon/' + encodeURIComponent(search.sourceTaxonScientificName) + '/' + search.interactionType;
         if (search.targetTaxonScientificName) {
-            uri = uri + "/" + encodeURIComponent(search.targetTaxonScientificName);
+            uri = uri + '/' + encodeURIComponent(search.targetTaxonScientificName);
         }
     } else {
-        uri = uri + "/interaction";
+        uri = uri + '/interaction';
+    }
+
+    var locationQuery = function (location) {
+        var locationQuery = '';
+        for (var elem in location) {
+            locationQuery += elem + '=' + location[elem] + '&';
+        }
+        return locationQuery;
     }
 
     uri = uri + '?type=json.v2';
     if (search.location) {
         uri = uri + '&' + locationQuery(search.location);
     }
+
+    function addTaxonQuery(taxonNames, elemName) {
+        if (taxonNames) {
+            var taxonQuery = '';
+            for (var name in taxonNames) {
+                taxonQuery += elemName + '=' + encodeURIComponent(taxonNames[name]) + '&';
+            }
+            uri = uri + taxonQuery;
+        }
+
+    }
+
+    addTaxonQuery(search.sourceTaxa, 'sourceTaxon');
+    addTaxonQuery(search.targetTaxa, 'targetTaxon');
+
     return uri;
 };
 
 globiData.urlForTaxonImageQuery = function (scientificName) {
-    return urlPrefix + "/imagesForName/" + encodeURIComponent(scientificName);
+    return urlPrefix + '/imagesForName/' + encodeURIComponent(scientificName);
 };
 
 globiData.findSpeciesInteractions = function (search, callback) {
@@ -9229,6 +9260,246 @@ globiData.findTaxonInfo = function (scientificName, callback) {
 
 module.exports = globiData;
 
-},{"d3":3}]},{},[1])(1)
+},{"d3":3}],5:[function(require,module,exports){
+(function(process){if (!process.EventEmitter) process.EventEmitter = function () {};
+
+var EventEmitter = exports.EventEmitter = process.EventEmitter;
+var isArray = typeof Array.isArray === 'function'
+    ? Array.isArray
+    : function (xs) {
+        return Object.prototype.toString.call(xs) === '[object Array]'
+    }
+;
+function indexOf (xs, x) {
+    if (xs.indexOf) return xs.indexOf(x);
+    for (var i = 0; i < xs.length; i++) {
+        if (x === xs[i]) return i;
+    }
+    return -1;
+}
+
+// By default EventEmitters will print a warning if more than
+// 10 listeners are added to it. This is a useful default which
+// helps finding memory leaks.
+//
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+var defaultMaxListeners = 10;
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!this._events) this._events = {};
+  this._events.maxListeners = n;
+};
+
+
+EventEmitter.prototype.emit = function(type) {
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events || !this._events.error ||
+        (isArray(this._events.error) && !this._events.error.length))
+    {
+      if (arguments[1] instanceof Error) {
+        throw arguments[1]; // Unhandled 'error' event
+      } else {
+        throw new Error("Uncaught, unspecified 'error' event.");
+      }
+      return false;
+    }
+  }
+
+  if (!this._events) return false;
+  var handler = this._events[type];
+  if (!handler) return false;
+
+  if (typeof handler == 'function') {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        var args = Array.prototype.slice.call(arguments, 1);
+        handler.apply(this, args);
+    }
+    return true;
+
+  } else if (isArray(handler)) {
+    var args = Array.prototype.slice.call(arguments, 1);
+
+    var listeners = handler.slice();
+    for (var i = 0, l = listeners.length; i < l; i++) {
+      listeners[i].apply(this, args);
+    }
+    return true;
+
+  } else {
+    return false;
+  }
+};
+
+// EventEmitter is defined in src/node_events.cc
+// EventEmitter.prototype.emit() is also defined there.
+EventEmitter.prototype.addListener = function(type, listener) {
+  if ('function' !== typeof listener) {
+    throw new Error('addListener only takes instances of Function');
+  }
+
+  if (!this._events) this._events = {};
+
+  // To avoid recursion in the case that type == "newListeners"! Before
+  // adding it to the listeners, first emit "newListeners".
+  this.emit('newListener', type, listener);
+
+  if (!this._events[type]) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  } else if (isArray(this._events[type])) {
+
+    // Check for listener leak
+    if (!this._events[type].warned) {
+      var m;
+      if (this._events.maxListeners !== undefined) {
+        m = this._events.maxListeners;
+      } else {
+        m = defaultMaxListeners;
+      }
+
+      if (m && m > 0 && this._events[type].length > m) {
+        this._events[type].warned = true;
+        console.error('(node) warning: possible EventEmitter memory ' +
+                      'leak detected. %d listeners added. ' +
+                      'Use emitter.setMaxListeners() to increase limit.',
+                      this._events[type].length);
+        console.trace();
+      }
+    }
+
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  } else {
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  var self = this;
+  self.on(type, function g() {
+    self.removeListener(type, g);
+    listener.apply(this, arguments);
+  });
+
+  return this;
+};
+
+EventEmitter.prototype.removeListener = function(type, listener) {
+  if ('function' !== typeof listener) {
+    throw new Error('removeListener only takes instances of Function');
+  }
+
+  // does not use listeners(), so no side effect of creating _events[type]
+  if (!this._events || !this._events[type]) return this;
+
+  var list = this._events[type];
+
+  if (isArray(list)) {
+    var i = indexOf(list, listener);
+    if (i < 0) return this;
+    list.splice(i, 1);
+    if (list.length == 0)
+      delete this._events[type];
+  } else if (this._events[type] === listener) {
+    delete this._events[type];
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  if (arguments.length === 0) {
+    this._events = {};
+    return this;
+  }
+
+  // does not use listeners(), so no side effect of creating _events[type]
+  if (type && this._events && this._events[type]) this._events[type] = null;
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  if (!this._events) this._events = {};
+  if (!this._events[type]) this._events[type] = [];
+  if (!isArray(this._events[type])) {
+    this._events[type] = [this._events[type]];
+  }
+  return this._events[type];
+};
+
+})(require("__browserify_process"))
+},{"__browserify_process":6}],6:[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            if (ev.source === window && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}]},{},[1])(1)
 });
 ;
