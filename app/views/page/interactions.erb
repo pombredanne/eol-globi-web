@@ -22,6 +22,27 @@
   </table>
 </div>
 <script type="text/javascript">
+    var spinnerOpts = {
+        lines: 13, // The number of lines to draw
+        length: 20, // The length of each line
+        width: 18, // The line thickness
+        radius: 49, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        //top: '200', // Top position relative to parent in px
+        left: '300' // Left position relative to parent in px
+    };
+    var target = document.getElementById( 'interaction_graph' );
+    var spinner = new Spinner( spinnerOpts ).spin(target);
+
     var EOL = EOL || {};
 
     EOL.interactions = {};
@@ -44,8 +65,9 @@
 
   // interaction data is received and has been rendered
   ee.on('ready', function () {
-      ee.appendGraphTo(document.querySelector('#interaction_graph'));
-      ee.appendLegendTo(document.querySelector('#interaction_graph_legend'));
+//      spinner.stop();
+//      ee.appendGraphTo(document.querySelector('#interaction_graph'));
+//      ee.appendLegendTo(document.querySelector('#interaction_graph_legend'));
   });
 
     // specific interactions have been selected by user
@@ -65,4 +87,7 @@
         // remove previously rendered interaction information
         globi.d3.selectAll('#selected-interactions').selectAll('div').remove();
     });
+</script>
+<script>
+
 </script>
