@@ -263,8 +263,8 @@ function hideRectControl() {
 function showRectControl() {
     if ( areaPicker === null ) {
         var startBounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng( testCoords.se_lat, testCoords.nw_lng ), // U.S. without alaska
-            new google.maps.LatLng( testCoords.nw_lat, testCoords.se_lng )   // and "islands"
+            new google.maps.LatLng( testCoords.se_lat, testCoords.nw_lng ), // California
+            new google.maps.LatLng( testCoords.nw_lat, testCoords.se_lng )
         );
 
         areaPicker = new google.maps.Rectangle( {
