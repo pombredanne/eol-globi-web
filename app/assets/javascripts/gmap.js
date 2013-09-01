@@ -276,12 +276,7 @@ function showRectControl() {
 
         google.maps.event.addListener( areaPicker, 'bounds_changed', function() {
             var newBounds = areaPicker.getBounds(),
-                transformedBoundsCoordinates = {
-                    nw_lat: newBounds.getNorthEast().lat(),
-                    nw_lng: newBounds.getSouthWest().lng(),
-                    se_lat: newBounds.getSouthWest().lat(),
-                    se_lng: newBounds.getNorthEast().lng()
-                };
+                transformedBoundsCoordinates = newBounds.toEolCoords();
 
             var ids = {"graphId": "graph-container", "legendId": "legend-container"};
 
@@ -375,3 +370,13 @@ function getInfoBoxSettings()
 
     };
 }
+
+google.maps.LatLngBounds.prototype.toEolCoords = function()
+{
+    return {
+        nw_lat: this.getNorthEast().lat(),
+        nw_lng: this.getSouthWest().lng(),
+        se_lat: this.getSouthWest().lat(),
+        se_lng: this.getNorthEast().lng()
+    }
+};
