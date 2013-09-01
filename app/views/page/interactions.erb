@@ -1,4 +1,4 @@
-<div class="minimap">
+<div id="minimap" style="width: 800px; height: 300px;">
 
 </div>
 <div align="center">
@@ -61,15 +61,41 @@
         height: 500
     };
 
-  // event emitter (ee) object is returned for client to respond to events
-  var ee = globi.addInteractionGraph( EOL.interactions.options );
 
-  // interaction data is received and has been rendered
-  ee.on('ready', function () {
-      spinner.stop();
-      ee.appendGraphTo(document.querySelector('#interaction_graph'));
-      ee.appendLegendTo(document.querySelector('#interaction_graph_legend'));
-  });
+
+    EOL.map = {};
+
+    EOL.map.bounds = ( new google.maps.LatLngBounds() ).fromEolCoords( EOL.interactions.options.location );
+
+    EOL.map.options = {
+        center: EOL.map.bounds.getCenter(),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true,
+        disableDoubleClickZoom: true,
+        draggable: false
+    };
+
+    EOL.map.instance = new google.maps.Map( document.getElementById( 'minimap' ), EOL.map.options );
+    EOL.map.instance.fitBounds( EOL.map.bounds );
+
+    EOL.map.areaPicker = new google.maps.Rectangle( {
+        bounds: EOL.map.bounds,
+        editable: false,
+        clickable: false,
+        fillOpacity: 0.1
+    } );
+
+    EOL.map.areaPicker.setMap( EOL.map.instance );
+
+    // event emitter (ee) object is returned for client to respond to events
+    var ee = globi.addInteractionGraph( EOL.interactions.options );
+
+    // interaction data is received and has been rendered
+    ee.on('ready', function () {
+        spinner.stop();
+        ee.appendGraphTo(document.querySelector('#interaction_graph'));
+        ee.appendLegendTo(document.querySelector('#interaction_graph_legend'));
+    });
 
     // specific interactions have been selected by user
     ee.on('select', function (interactions) {
