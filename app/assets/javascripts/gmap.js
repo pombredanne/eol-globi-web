@@ -304,7 +304,6 @@ function showSpatialInfoBox( bounds )
  */
 function getSpatialInfoBoxContentString( bounds )
 {
-    bounds = bounds.toEolCoords();
     return '<div>'+
         '<a target="_blank" href="interactions?'
         + 'nw_lat=' + bounds.nw_lat
@@ -324,4 +323,20 @@ google.maps.LatLngBounds.prototype.toEolCoords = function()
         se_lat: this.getSouthWest().lat(),
         se_lng: this.getNorthEast().lng()
     }
+};
+
+/**
+ *
+ * @param {Object} eolCoords
+ * @param {String} eolCoords.nw_lat
+ * @param {String} eolCoords.nw_lng
+ * @param {String} eolCoords.se_lat
+ * @param {String} eolCoords.se_lng
+ * @return {google.maps.LatLngBounds}
+ */
+google.maps.LatLngBounds.prototype.fromEolCoords = function( eolCoords )
+{
+    var sw = new google.maps.LatLng( eolCoords.nw_lat, eolCoords.se_lng );
+    var ne = new google.maps.LatLng( eolCoords.se_lat, eolCoords.nw_lng );
+    return new this( sw, ne );
 };
