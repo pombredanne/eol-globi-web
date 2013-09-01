@@ -285,33 +285,45 @@ function showRectControl() {
 
             var ids = {"graphId": "graph-container", "legendId": "legend-container"};
 
-            var contentString = '<div>'+
-                '<a target="_blank" href="interactions?'
-                    + 'nw_lat=' + transformedBoundsCoordinates.nw_lat
-                    + '&nw_lng=' + transformedBoundsCoordinates.nw_lng
-                    + '&se_lat=' + transformedBoundsCoordinates.se_lat
-                    + '&se_lng=' + transformedBoundsCoordinates.se_lng
-                +'"><span>show interactions</span></br>' +
-                '</a><br/>' +
-                '</div>';
-
-
-            infoWindow.close();
-
-            infoWindow.setContent( contentString );
-            infoWindow.setPosition( newBounds.getCenter() );
-            infoWindow.open(map);
-
-
-
-//            showInfoBox( newBounds.getNorthEast() );
-//            globi.addInteractionGraph( testCoords, ids, 1000, 500 );
-
-            //console.log( newBounds.toString() );
+            var contentString = getSpatialInfoBoxContentString( transformedBoundsCoordinates );
+            showSpatialInfoBox( contentString, newBounds );
 
         } );
     }
     areaPicker.setMap( map );
+}
+
+/**
+ * @param {String} contentString
+ * @param {google.maps.LatLngBounds} bounds
+ */
+function showSpatialInfoBox( contentString, bounds )
+{
+    infoWindow.close();
+
+    infoWindow.setContent( contentString );
+    infoWindow.setPosition( bounds.getCenter() );
+    infoWindow.open(map);
+}
+
+/**
+ * @param {Object} bounds
+ * @param {String} bounds.nw_lat
+ * @param {String} bounds.nw_lng
+ * @param {String} bounds.se_lat
+ * @param {String} bounds.se_lng
+ */
+function getSpatialInfoBoxContentString( bounds )
+{
+    return '<div>'+
+        '<a target="_blank" href="interactions?'
+        + 'nw_lat=' + bounds.nw_lat
+        + '&nw_lng=' + bounds.nw_lng
+        + '&se_lat=' + bounds.se_lat
+        + '&se_lng=' + bounds.se_lng
+        +'"><span>show interactions</span></br>' +
+        '</a><br/>' +
+        '</div>';
 }
 
 function showInfoBox( position )
