@@ -272,16 +272,15 @@ function showRectControl() {
             editable: true
         } );
 
+        showSpatialInfoBox( startBounds );
+
+
         areaPicker.setMap( map );
 
         google.maps.event.addListener( areaPicker, 'bounds_changed', function() {
-            var newBounds = areaPicker.getBounds(),
-                transformedBoundsCoordinates = newBounds.toEolCoords();
+            var newBounds = areaPicker.getBounds();
 
-            var ids = {"graphId": "graph-container", "legendId": "legend-container"};
-
-            var contentString = getSpatialInfoBoxContentString( transformedBoundsCoordinates );
-            showSpatialInfoBox( contentString, newBounds );
+            showSpatialInfoBox( newBounds );
 
         } );
     }
@@ -289,27 +288,23 @@ function showRectControl() {
 }
 
 /**
- * @param {String} contentString
  * @param {google.maps.LatLngBounds} bounds
  */
-function showSpatialInfoBox( contentString, bounds )
+function showSpatialInfoBox( bounds )
 {
     infoWindow.close();
 
-    infoWindow.setContent( contentString );
+    infoWindow.setContent( getSpatialInfoBoxContentString( bounds ) );
     infoWindow.setPosition( bounds.getCenter() );
     infoWindow.open(map);
 }
 
 /**
- * @param {Object} bounds
- * @param {String} bounds.nw_lat
- * @param {String} bounds.nw_lng
- * @param {String} bounds.se_lat
- * @param {String} bounds.se_lng
+ * @param {google.maps.LatLngBounds} bounds
  */
 function getSpatialInfoBoxContentString( bounds )
 {
+    bounds = bounds.toEolCoords();
     return '<div>'+
         '<a target="_blank" href="interactions?'
         + 'nw_lat=' + bounds.nw_lat
