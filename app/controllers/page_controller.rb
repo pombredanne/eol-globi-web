@@ -62,7 +62,9 @@ class PageController < ApplicationController
       @se_lat = 32.750323
       @se_lng = -114.744873
     end
-    end
+
+    render :layout => 'page_interactions'
+  end
 
   def terms
   end
