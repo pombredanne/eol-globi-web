@@ -316,56 +316,6 @@ function getSpatialInfoBoxContentString( bounds )
         '</div>';
 }
 
-function showInfoBox( position )
-{
-    if ( infoBox === null ) {
-        infoBox = new InfoBox( getInfoBoxSettings());
-
-        var boxContentContainer = [
-            '<div id="interaction-container">',
-                '<div id="graph-container" style="width: 80%; float: left;">',
-                '</div>',
-                '<div id="legend-container" style="width: 20%; float: left; margin-top: -25px;">',
-                '</div>',
-            '</div>'
-        ].join( '' );
-
-
-        infoBox.setContent( boxContentContainer );
-    }
-
-    infoBox.setMap( map );
-
-    infoBox.setPosition( position );
-
-    infoBox.draw();
-}
-
-function getInfoBoxSettings()
-{
-    return {
-        disableAutoPan: false
-        ,maxWidth: 0
-        ,zIndex: null
-        ,boxStyle: {
-            background: "white"
-            ,opacity: 0.99
-            ,padding: '5px'
-            ,border: 'solid 1px #000'
-            ,width: '1200px'
-            ,height: '500px'
-        }
-        ,closeBoxMargin: "10px 2px 2px 2px"
-        ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-        ,infoBoxClearance: new google.maps.Size(10, 10)
-        ,isHidden: false
-        ,pane: "floatPane"
-        ,enableEventPropagation: false
-        ,alignBottom: true
-
-    };
-}
-
 google.maps.LatLngBounds.prototype.toEolCoords = function()
 {
     return {
