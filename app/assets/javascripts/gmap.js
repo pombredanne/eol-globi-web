@@ -279,7 +279,6 @@ function showRectControl() {
 
         google.maps.event.addListener( areaPicker, 'bounds_changed', function() {
             var newBounds = areaPicker.getBounds();
-
             showSpatialInfoBox( newBounds );
 
         } );
@@ -304,6 +303,7 @@ function showSpatialInfoBox( bounds )
  */
 function getSpatialInfoBoxContentString( bounds )
 {
+    bounds = bounds.toEolCoords();
     return '<div>'+
         '<a target="_blank" href="interactions?'
         + 'nw_lat=' + bounds.nw_lat
@@ -336,7 +336,7 @@ google.maps.LatLngBounds.prototype.toEolCoords = function()
  */
 google.maps.LatLngBounds.prototype.fromEolCoords = function( eolCoords )
 {
-    var sw = new google.maps.LatLng( eolCoords.nw_lat, eolCoords.se_lng );
-    var ne = new google.maps.LatLng( eolCoords.se_lat, eolCoords.nw_lng );
-    return new this( sw, ne );
+    var sw = new google.maps.LatLng( eolCoords.se_lat, eolCoords.nw_lng );
+    var ne = new google.maps.LatLng( eolCoords.nw_lat, eolCoords.se_lng );
+    return new google.maps.LatLngBounds( sw, ne );
 };
