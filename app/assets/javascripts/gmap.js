@@ -269,7 +269,8 @@ function showRectControl() {
 
         areaPicker = new google.maps.Rectangle( {
             bounds: startBounds,
-            editable: true
+            editable: true,
+            draggable: true
         } );
 
         showSpatialInfoBox( startBounds );
