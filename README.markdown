@@ -1,4 +1,4 @@
-Trophic Graph
+trophicgraph.com
 =============
 
 [![Build Status](https://travis-ci.org/reiz/eol-globi-web.png)](https://travis-ci.org/reiz/eol-globi-web)
