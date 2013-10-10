@@ -50,6 +50,10 @@ class PageController < ApplicationController
     @contributors = Contributor.fetch_contributors
   end
 
+  def info
+	@info = Info.fetch_info
+  end
+
   def interactions
     @nw_lat = params[:nw_lat]
     @nw_lng = params[:nw_lng]

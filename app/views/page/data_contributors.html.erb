@@ -1,6 +1,6 @@
 <div class="content_cell">
   <h1>Data Contributors</h1>  
-  <p>Total studies contributed: <%= @contributors.count %> </p>
+  <p><%= number_to_human(@info.total_studies) %> studies contributed a total of <%= number_to_human(@info.total_interactions) %> directed interactions across <%= number_to_human(@info.total_source_taxa) %> source taxa and <%= number_to_human(@info.total_target_taxa) %> target taxa. </p>
   <table id="table-3">
     <tr>
       <th>Contributor</th>
