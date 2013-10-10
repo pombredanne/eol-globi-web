@@ -48,9 +48,6 @@ class PageController < ApplicationController
 
   def data_contributors
     @contributors = Contributor.fetch_contributors
-  end
-
-  def info
 	@info = Info.fetch_info
   end
 
